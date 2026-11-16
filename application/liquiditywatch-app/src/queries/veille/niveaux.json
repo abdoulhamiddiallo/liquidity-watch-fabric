@@ -1,0 +1,119 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Minutes-marché passées à chaque niveau de stress.",
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "y": {
+      "field": "Niveau",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "1 · Calme",
+        "2 · Tendu",
+        "3 · Stress",
+        "4 · Détresse"
+      ],
+      "axis": {
+        "labelFontSize": 13,
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "x": {
+      "field": "Minutes",
+      "type": "quantitative",
+      "title": null,
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 5,
+        "height": {
+          "band": 0.62
+        }
+      },
+      "encoding": {
+        "color": {
+          "field": "Niveau",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "1 · Calme",
+              "2 · Tendu",
+              "3 · Stress",
+              "4 · Détresse"
+            ],
+            "range": [
+              "@calme",
+              "@tendu",
+              "@stress",
+              "@detresse"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "Niveau",
+            "type": "nominal"
+          },
+          {
+            "field": "Minutes",
+            "type": "quantitative",
+            "title": "Minutes-marché"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 13,
+        "fontWeight": 700,
+        "color": "@texte",
+        "limit": 400
+      },
+      "encoding": {
+        "text": {
+          "field": "Minutes",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "Minutes",
+              "as": "Max"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.Max * 1.22",
+          "as": "Borne"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "opacity": 0
+      },
+      "encoding": {
+        "x": {
+          "field": "Borne",
+          "type": "quantitative",
+          "axis": null,
+          "title": null
+        }
+      }
+    }
+  ]
+}

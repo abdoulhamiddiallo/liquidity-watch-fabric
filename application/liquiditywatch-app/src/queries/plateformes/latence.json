@@ -1,0 +1,117 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Latence moyenne par plateforme.",
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "y": {
+      "field": "Plateforme",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "Latence",
+        "order": "ascending"
+      },
+      "axis": {
+        "labelFontSize": 14,
+        "labelFontWeight": 600,
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "x": {
+      "field": "Latence",
+      "type": "quantitative",
+      "title": null,
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 6,
+        "height": {
+          "band": 0.56
+        }
+      },
+      "encoding": {
+        "color": {
+          "field": "Plateforme",
+          "type": "nominal",
+          "scale": "@plateformes",
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "Plateforme",
+            "type": "nominal"
+          },
+          {
+            "field": "Latence",
+            "type": "quantitative",
+            "format": ",.0f",
+            "title": "Latence (ms)"
+          },
+          {
+            "field": "Carnets",
+            "type": "quantitative",
+            "format": ",.0f"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 8,
+        "fontSize": 15,
+        "fontWeight": 700,
+        "color": "@texte",
+        "limit": 400
+      },
+      "encoding": {
+        "text": {
+          "field": "Etiquette",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "joinaggregate": [
+            {
+              "op": "max",
+              "field": "Latence",
+              "as": "Max"
+            }
+          ]
+        },
+        {
+          "calculate": "datum.Max * 1.25",
+          "as": "Borne"
+        }
+      ],
+      "mark": {
+        "type": "point",
+        "opacity": 0
+      },
+      "encoding": {
+        "x": {
+          "field": "Borne",
+          "type": "quantitative",
+          "axis": null,
+          "title": null
+        }
+      }
+    }
+  ],
+  "transform": [
+    {
+      "calculate": "format(datum.Latence, ',.0f') + ' ms'",
+      "as": "Etiquette"
+    }
+  ]
+}

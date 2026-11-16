@@ -1,0 +1,110 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Carte de chaleur du LSI par marché et par tranche de 5 minutes.",
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "x": {
+      "field": "Tranche",
+      "type": "ordinal",
+      "timeUnit": "hoursminutes",
+      "title": null,
+      "axis": {
+        "format": "%H:%M",
+        "labelAngle": 0,
+        "orient": "top",
+        "domain": false,
+        "ticks": false
+      }
+    },
+    "y": {
+      "field": "Marche",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "Ordre",
+        "op": "min"
+      },
+      "axis": {
+        "domain": false,
+        "ticks": false,
+        "labelFontWeight": 600,
+        "labelFontSize": 13
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 5,
+        "stroke": "@fond",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "color": {
+          "field": "LSI",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": [
+              1,
+              2,
+              3
+            ],
+            "range": [
+              "@calme",
+              "@tendu",
+              "@stress",
+              "@detresse"
+            ]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "Marche",
+            "type": "nominal",
+            "title": "Marché"
+          },
+          {
+            "field": "Tranche",
+            "type": "temporal",
+            "timeUnit": "hoursminutes",
+            "format": "%H:%M",
+            "title": "Tranche"
+          },
+          {
+            "field": "LSI",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "LSI le plus haut"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 13,
+        "fontWeight": 700,
+        "limit": 400
+      },
+      "encoding": {
+        "text": {
+          "field": "EtiquetteLsi",
+          "type": "nominal"
+        },
+        "color": {
+          "value": "#071019"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "replace(format(datum.LSI, '.2f'), '.', ',')",
+          "as": "EtiquetteLsi"
+        }
+      ]
+    }
+  ]
+}

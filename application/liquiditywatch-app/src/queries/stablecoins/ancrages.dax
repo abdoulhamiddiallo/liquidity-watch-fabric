@@ -1,0 +1,13 @@
+// Bilan de chaque ancrage : écart moyen, pire écart, prix plancher, décrochage, état.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Carnets'[Série],
+    TREATAS({"Stablecoin"}, 'Marché'[Classe]),
+    /*FILTRES,*/
+    "EcartMoyen", [Écart au dollar (pb)],
+    "PireEcart", [Pire écart au dollar (pb)],
+    "Plancher", MIN('Carnets'[Prix minimal]),
+    "Decrochage", [Minutes en décrochage],
+    "Etat", [État de l'ancrage]
+)
+ORDER BY [PireEcart]

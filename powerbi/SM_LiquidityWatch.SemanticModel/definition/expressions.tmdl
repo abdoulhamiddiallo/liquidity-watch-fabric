@@ -1,0 +1,10 @@
+expression Cluster = "https://VOTRE-EVENTHOUSE.kusto.fabric.microsoft.com" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 550161be-659e-5a31-8be2-b6f74359a33a
+
+	annotation PBI_ResultType = Text
+
+expression Base = "EH_LiquidityWatch" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: 581270ea-95f3-5f22-84fe-d819713c5e85
+
+	annotation PBI_ResultType = Text
+

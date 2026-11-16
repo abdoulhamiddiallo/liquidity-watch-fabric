@@ -1,0 +1,184 @@
+/// Indice de stress de liquidité par marché et par minute (fonction LW_StressIndex)
+table 'LSI'
+	lineageTag: 87a71559-a45f-539a-9e97-62ce83a8ba20
+
+	column 'Clé'
+		dataType: string
+		isHidden
+		lineageTag: d210f985-e8cf-5f6a-bde5-76d79279e45b
+		summarizeBy: none
+		sourceColumn: cle
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Symbole'
+		dataType: string
+		isHidden
+		lineageTag: 1ade64ab-4a34-52ea-bb62-c30b52fbbdf4
+		summarizeBy: none
+		sourceColumn: symbol
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Minute'
+		dataType: dateTime
+		isHidden
+		lineageTag: 530005c8-35ba-55bc-9dcd-c32479b53522
+		summarizeBy: none
+		sourceColumn: minute
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'LSI'
+		dataType: double
+		formatString: 0.00
+		lineageTag: ea9201e2-bc37-5549-88fc-39f381e045a4
+		summarizeBy: none
+		sourceColumn: lsi
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Niveau'
+		dataType: string
+		lineageTag: 52164d2e-b10b-574e-8c90-926bb024f1ed
+		summarizeBy: none
+		sourceColumn: niveau
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fourchette (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: e144dfe7-77c3-5066-923d-b4df08f45a85
+		summarizeBy: none
+		sourceColumn: spread_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profondeur ±5 pb ($)'
+		dataType: double
+		formatString: #,0
+		lineageTag: 045fc607-6dda-5407-9ece-c73b81891ea0
+		summarizeBy: none
+		sourceColumn: depth_5bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dislocation (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 98c748a1-457d-5ed4-9b0f-379ca938073c
+		summarizeBy: none
+		sourceColumn: disloc_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Volatilité (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 3a33ae4e-8e8a-5719-8464-fab58d4d0101
+		summarizeBy: none
+		sourceColumn: vol_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Déséquilibre'
+		dataType: double
+		formatString: 0.000
+		lineageTag: 391162ff-575c-5dd8-a71b-039358180291
+		summarizeBy: none
+		sourceColumn: imbalance
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Écart robuste fourchette'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: 63df9064-a1dd-5df7-96e7-51720d3310bb
+		summarizeBy: none
+		sourceColumn: z_spread
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Écart robuste profondeur'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: 0c909e95-8099-514f-af13-771b71c62140
+		summarizeBy: none
+		sourceColumn: z_depth
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Écart robuste dislocation'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: 08d85084-8518-5fed-a176-626c999c5954
+		summarizeBy: none
+		sourceColumn: z_disloc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Écart robuste volatilité'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: d7cc908d-86e8-5cdf-a21c-b0d25a24e1a9
+		summarizeBy: none
+		sourceColumn: z_vol
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Apport fourchette'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: be594ca8-13fc-52cc-b422-8d1c1df7c7fb
+		summarizeBy: none
+		sourceColumn: c_fourchette
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Apport profondeur'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: b036e88f-9a7f-57ab-8674-9a0142003922
+		summarizeBy: none
+		sourceColumn: c_profondeur
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Apport dislocation'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: a8a9a4d5-2856-5952-9684-c83a3e87e97d
+		summarizeBy: none
+		sourceColumn: c_dislocation
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Apport volatilité'
+		dataType: double
+		formatString: 0.00
+		isHidden
+		lineageTag: b34bb988-a9fb-5450-88e8-f4b12e0ca604
+		summarizeBy: none
+		sourceColumn: c_volatilite
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'LSI' = m
+		mode: import
+		source =
+				let
+					Source = AzureDataExplorer.Contents(Cluster, Base, "LW_StressIndex(10080) | extend cle = strcat(symbol, "" "", format_datetime(minute, ""yyyy-MM-dd HH:mm"")), c_fourchette = round(0.35 * min_of(max_of(z_spread, -3.0), 10.0), 3), c_profondeur = round(0.35 * min_of(max_of(z_depth, -3.0), 10.0), 3), c_dislocation = round(0.15 * min_of(max_of(z_disloc, -3.0), 10.0), 3), c_volatilite = round(0.15 * min_of(max_of(z_vol, -3.0), 10.0), 3) | project cle, symbol, minute, lsi, niveau, spread_bps, depth_5bps, disloc_bps, vol_bps, imbalance, z_spread, z_depth, z_disloc, z_vol, c_fourchette, c_profondeur, c_dislocation, c_volatilite", [MaxRows = null, MaxSize = null, NoTruncate = null, AdditionalSetStatements = null]),
+					Types = Table.TransformColumnTypes(Source, {{"cle", type text}, {"symbol", type text}, {"minute", type datetime}, {"lsi", type number}, {"niveau", type text}, {"spread_bps", type number}, {"depth_5bps", type number}, {"disloc_bps", type number}, {"vol_bps", type number}, {"imbalance", type number}, {"z_spread", type number}, {"z_depth", type number}, {"z_disloc", type number}, {"z_vol", type number}, {"c_fourchette", type number}, {"c_profondeur", type number}, {"c_dislocation", type number}, {"c_volatilite", type number}}, "en-US")
+				in
+					Types
+
+	annotation PBI_ResultType = Table
+

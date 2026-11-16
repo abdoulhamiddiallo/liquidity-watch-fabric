@@ -1,0 +1,152 @@
+// LIQUIDITY WATCH | Bloc 1 : couche Silver typée (exécutez chaque commande seule : sélectionnez-la puis Exécuter)
+.create table lw_book_silver (
+    ts: datetime, venue: string, symbol: string, asset_class: string,
+    best_bid: real, best_ask: real, mid: real, microprice: real, spread_bps: real,
+    depth_bid_5bps: real, depth_ask_5bps: real, depth_5bps: real, depth_20bps: real,
+    imbalance_5bps: real, coverage_bps: real, latency_ms: real, scenario: string)
+
+// LIQUIDITY WATCH | Bloc 2 : la fonction qui type et contrôle chaque événement brut
+.create-or-alter function with (folder = "01 Silver", docstring = "Type et contrôle les événements bruts de lw_book")
+LW_ParseBook() {
+    lw_book
+    | project ts = todatetime(tostring(event_time)), venue = tostring(venue), symbol = tostring(symbol),
+              asset_class = tostring(asset_class), best_bid = toreal(best_bid), best_ask = toreal(best_ask),
+              mid = toreal(mid), microprice = toreal(microprice), spread_bps = toreal(spread_bps),
+              depth_bid_5bps = toreal(depth_bid_5bps), depth_ask_5bps = toreal(depth_ask_5bps),
+              depth_5bps = toreal(depth_bid_5bps) + toreal(depth_ask_5bps),
+              depth_20bps = toreal(depth_bid_20bps) + toreal(depth_ask_20bps),
+              imbalance_5bps = toreal(imbalance_5bps), coverage_bps = toreal(coverage_bps),
+              latency_ms = toreal(latency_ms), scenario = tostring(scenario)
+    | where isnotnull(ts) and mid > 0 and best_ask >= best_bid
+}
+
+// LIQUIDITY WATCH | Bloc 3 : reprise de l'historique déjà reçu, puis branchement automatique
+.set-or-append lw_book_silver <| LW_ParseBook()
+
+.alter table lw_book_silver policy update
+@'[{"IsEnabled": true, "Source": "lw_book", "Query": "LW_ParseBook()", "IsTransactional": false, "PropagateIngestionProperties": false}]'
+
+.alter-merge table lw_book policy retention softdelete = 7d
+
+.alter-merge table lw_book_silver policy retention softdelete = 30d
+
+// LIQUIDITY WATCH | Bloc 4 : vue matérialisée, une ligne par plateforme, marché et minute
+.create async materialized-view with (backfill = true) lw_minute on table lw_book_silver
+{
+    lw_book_silver
+    | summarize arg_max(ts, mid), spread_avg_bps = avg(spread_bps), spread_max_bps = max(spread_bps),
+                depth5_avg = avg(depth_5bps), depth5_min = min(depth_5bps), samples = count()
+        by venue, symbol, asset_class, minute = bin(ts, 1m)
+}
+
+// LIQUIDITY WATCH | Bloc 5 : l'horloge et la fenêtre glissante
+.create-or-alter function with (folder = "02 Signaux", docstring = "Horodatage du dernier carnet reçu")
+LW_Clock() {
+    toscalar(lw_book_silver | summarize max(ts))
+}
+
+.create-or-alter function with (folder = "02 Signaux", docstring = "Carnets des N dernières minutes avant le dernier signal")
+LW_Window(minutes: int = 60) {
+    let c = LW_Clock();
+    lw_book_silver
+    | where ts between ((c - minutes * 1m) .. c)
+}
+
+// LIQUIDITY WATCH | Bloc 6 : les mesures consolidées par marché et par minute
+.create-or-alter function with (folder = "02 Signaux", docstring = "Fourchette, profondeur, dislocation et volatilité par marché et par minute")
+LW_MinuteMetrics(minutes: int = 90) {
+    let w = LW_Window(minutes) | where asset_class == "crypto";
+    let per_venue = w
+        | summarize spread_bps = avg(spread_bps), depth_5bps = avg(depth_5bps), mid = avg(mid), imbalance = avg(imbalance_5bps)
+            by symbol, venue, minute = bin(ts, 1m);
+    let vol = w
+        | order by symbol asc, venue asc, ts asc
+        | extend r = iff(prev(symbol) == symbol and prev(venue) == venue, log(mid / prev(mid)), real(null))
+        | summarize vol_bps = stdev(r) * 10000 by symbol, minute = bin(ts, 1m);
+    per_venue
+    | summarize spread_bps = avg(spread_bps), depth_5bps = sum(depth_5bps), imbalance = avg(imbalance),
+                disloc_bps = (max(mid) - min(mid)) / avg(mid) * 10000, venues = dcount(venue)
+        by symbol, minute
+    | join kind=leftouter vol on symbol, minute
+    | project symbol, minute, spread_bps, depth_5bps, imbalance, disloc_bps, vol_bps = coalesce(vol_bps, 0.0), venues
+}
+
+// LIQUIDITY WATCH | Bloc 7 : l'indice de stress de liquidité (LSI)
+.create-or-alter function with (folder = "02 Signaux", docstring = "Indice de stress de liquidité : 4 signaux en écarts robustes, pondérés")
+LW_StressIndex(minutes: int = 90) {
+    let m = materialize(LW_MinuteMetrics(minutes));
+    let base = m
+        | summarize s50 = percentile(spread_bps, 50), s25 = percentile(spread_bps, 25), s75 = percentile(spread_bps, 75),
+                    d50 = percentile(depth_5bps, 50), d25 = percentile(depth_5bps, 25), d75 = percentile(depth_5bps, 75),
+                    x50 = percentile(disloc_bps, 50), x25 = percentile(disloc_bps, 25), x75 = percentile(disloc_bps, 75),
+                    v50 = percentile(vol_bps, 50), v25 = percentile(vol_bps, 25), v75 = percentile(vol_bps, 75)
+            by symbol;
+    m
+    | join kind=inner base on symbol
+    | extend z_spread = (spread_bps - s50) / max_of((s75 - s25) / 1.349, s50 * 0.05, 0.01),
+             z_depth  = (d50 - depth_5bps) / max_of((d75 - d25) / 1.349, d50 * 0.05, 1.0),
+             z_disloc = (disloc_bps - x50) / max_of((x75 - x25) / 1.349, 0.5),
+             z_vol    = (vol_bps - v50) / max_of((v75 - v25) / 1.349, 0.5)
+    | extend lsi = round(0.35 * min_of(max_of(z_spread, -3.0), 10.0) + 0.35 * min_of(max_of(z_depth, -3.0), 10.0)
+                       + 0.15 * min_of(max_of(z_disloc, -3.0), 10.0) + 0.15 * min_of(max_of(z_vol, -3.0), 10.0), 2)
+    | extend niveau = case(lsi >= 3, "4 · Détresse", lsi >= 2, "3 · Stress", lsi >= 1, "2 · Tendu", "1 · Calme")
+    | project symbol, minute, lsi, niveau, spread_bps = round(spread_bps, 2), depth_5bps = round(depth_5bps, 0),
+              disloc_bps = round(disloc_bps, 2), vol_bps = round(vol_bps, 2), imbalance = round(imbalance, 3),
+              z_spread = round(z_spread, 2), z_depth = round(z_depth, 2), z_disloc = round(z_disloc, 2), z_vol = round(z_vol, 2)
+}
+
+// LIQUIDITY WATCH | Bloc 8 : stablecoins, santé des flux, anomalies
+.create-or-alter function with (folder = "02 Signaux", docstring = "Ancrage des stablecoins face au dollar, en points de base")
+LW_Depeg() {
+    LW_Window(10)
+    | where asset_class == "stablecoin"
+    | summarize arg_max(ts, mid, spread_bps, scenario) by venue, symbol
+    | extend depeg_bps = round((mid - 1.0) * 10000, 1)
+    | extend etat = case(abs(depeg_bps) >= 50, "Décrochage", abs(depeg_bps) >= 20, "Sous surveillance", "Ancré")
+    | project symbol, venue, mid = round(mid, 5), depeg_bps, etat, spread_bps = round(spread_bps, 2), scenario, ts
+}
+
+.create-or-alter function with (folder = "02 Signaux", docstring = "Santé de chaque plateforme sur les 5 dernières minutes")
+LW_VenueHealth() {
+    let c = LW_Clock();
+    LW_Window(5)
+    | summarize events = count(), latency_ms = round(avg(latency_ms), 0), last_seen = max(ts) by venue
+    | extend silence_s = datetime_diff('second', c, last_seen)
+    | extend etat = iff(silence_s > 30, "Silencieuse", "En ligne")
+}
+
+.create-or-alter function with (folder = "02 Signaux", docstring = "Écartements anormaux de fourchette, détectés par décomposition de série")
+LW_SpreadAnomalies(minutes: int = 120) {
+    let c = LW_Clock();
+    lw_book_silver
+    | where ts between ((c - minutes * 1m) .. c)
+    | make-series spread = avg(spread_bps) default = real(null) on ts from c - minutes * 1m to c step 30s by venue, symbol
+    | extend spread = series_fill_linear(spread)
+    | extend (anomaly, score, baseline) = series_decompose_anomalies(spread, 2.5, -1, 'linefit')
+    | mv-expand ts to typeof(datetime), spread to typeof(real), anomaly to typeof(int), score to typeof(real), baseline to typeof(real)
+    | where anomaly == 1
+    | project ts, venue, symbol, spread_bps = round(spread, 2), attendu_bps = round(baseline, 2), score = round(score, 1)
+}
+
+// LIQUIDITY WATCH | Bloc 9 : contrôles (exécutez chaque requête séparément)
+lw_book
+| count
+
+lw_book_silver
+| summarize evenements = count(), dernier = max(ts) by venue, symbol
+| order by venue asc, symbol asc
+
+LW_StressIndex(90)
+| summarize arg_max(minute, *) by symbol
+
+LW_Depeg()
+
+// LIQUIDITY WATCH | Bloc 10 : contexte macro lu par raccourci OneLake (après l'étape 8)
+.create-or-alter function with (folder = "03 Contexte", docstring = "Dernier VIX et dernier €STR, lus dans le lakehouse sans copie")
+LW_Macro() {
+    let v = external_table("macro_vix") | top 1 by vix_date desc | project vix_date, vix_close, regime, k = 1;
+    let e = external_table("macro_estr") | top 1 by rate_date desc | project rate_date, estr_pct, estr_change_bp, k = 1;
+    v
+    | join kind=inner e on k
+    | project vix_date, vix_close, regime, rate_date, estr_pct, estr_change_bp
+}

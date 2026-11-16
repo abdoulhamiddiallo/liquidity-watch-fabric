@@ -1,0 +1,17 @@
+// Les huit écartements de fourchette les plus anormaux.
+EVALUATE
+TOPN(
+    8,
+    SUMMARIZECOLUMNS(
+        'Anomalies'[Heure],
+        'Plateforme'[Plateforme],
+        'Marché'[Marché],
+        'Anomalies'[Fourchette observée (pb)],
+        'Anomalies'[Fourchette habituelle (pb)],
+        'Anomalies'[Score],
+        /*FILTRES,*/
+        "Nombre", COUNTROWS('Anomalies')
+    ),
+    'Anomalies'[Score], DESC
+)
+ORDER BY 'Anomalies'[Score] DESC

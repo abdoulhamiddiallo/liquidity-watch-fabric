@@ -1,0 +1,7 @@
+// Clôture quotidienne du VIX depuis janvier 2024.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'VIX'[Date],
+    "VIX", [VIX (clôture)]
+)
+ORDER BY 'VIX'[Date]

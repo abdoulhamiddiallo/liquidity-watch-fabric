@@ -1,0 +1,18 @@
+// Tableau de veille : pic de stress, détresse, ancrage de l'USDT, volume lu et récit.
+EVALUATE
+CALCULATETABLE(
+    ROW(
+        "PicLSI", [LSI maximal],
+        "MarcheTendu", [Marché le plus tendu],
+        "HeurePic", [Heure du pic],
+        "NiveauPic", [Niveau au pic],
+        "MinutesDetresse", [Minutes en détresse],
+        "MinutesObservees", [Minutes observées],
+        "PartTension", [Part du temps sous tension],
+        "PireUSDT", [Pire écart USDT (pb)],
+        "Carnets", [Carnets analysés],
+        "Recit", [Récit synthèse],
+        "Dernier", [Dernier carnet reçu]
+    )
+    /*,FILTRES*/
+)

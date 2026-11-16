@@ -1,0 +1,66 @@
+/// Les 5 marchés suivis : 3 cryptoactifs et 2 stablecoins
+table 'Marché'
+	lineageTag: 807cbd79-6f5f-5d58-823c-5db518ecf0db
+
+	column 'Symbole'
+		dataType: string
+		lineageTag: 7e38255d-f3b2-50b8-9de8-9f80c50e0b23
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Symbole]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Marché'
+		dataType: string
+		lineageTag: 5cf933aa-d53b-5615-b3e0-8bf3a8c56abb
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Marché]
+		sortByColumn: 'Ordre'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Actif'
+		dataType: string
+		lineageTag: 9692d05d-2112-5b10-9e3f-c6c7322c527f
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Actif]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Classe'
+		dataType: string
+		lineageTag: ab1a0830-18e0-5ef8-9e3f-ffcb9a8fdcfa
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Classe]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordre'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 74ba3ab1-7c29-54b7-bae4-22e26d67f4a5
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Ordre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Couleur'
+		dataType: string
+		isHidden
+		lineageTag: c3d5d15f-d4c1-5841-a8b5-e384d0251fbe
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Couleur]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Marché' = calculated
+		mode: import
+		source = DATATABLE ( "Symbole", STRING, "Marché", STRING, "Actif", STRING, "Classe", STRING, "Ordre", INTEGER, "Couleur", STRING, { { "BTC-USD", "BTC-USD", "Bitcoin", "Cryptoactif", 1, "#5B8CFF" }, { "ETH-USD", "ETH-USD", "Ether", "Cryptoactif", 2, "#B48CFF" }, { "SOL-USD", "SOL-USD", "Solana", "Cryptoactif", 3, "#2DD4BF" }, { "USDT-USD", "USDT-USD", "Tether", "Stablecoin", 4, "#F59E3B" }, { "USDC-USD", "USDC-USD", "USD Coin", "Stablecoin", 5, "#F5C451" } } )
+

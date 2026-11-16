@@ -1,0 +1,374 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "LSI minute par minute, bandes de niveau et seuils 1, 2 et 3.",
+  "width": "container",
+  "height": "container",
+  "layer": [
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.07,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "datum": 1,
+          "type": "quantitative"
+        },
+        "y2": {
+          "datum": 2
+        },
+        "color": {
+          "value": "@tendu"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.08,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "datum": 2,
+          "type": "quantitative"
+        },
+        "y2": {
+          "datum": 3
+        },
+        "color": {
+          "value": "@stress"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "LSI",
+              "as": "MaxLSI"
+            }
+          ]
+        },
+        {
+          "calculate": "max(datum.MaxLSI + 0.4, 3.6)",
+          "as": "Haut"
+        },
+        {
+          "calculate": "3",
+          "as": "Seuil"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.08,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "field": "Seuil",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "Haut"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 1,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@tendu"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 2,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@stress"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 3,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "Heure",
+              "as": "HeureMax"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -3,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "HeureMax",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 1,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Tendu"
+        },
+        "color": {
+          "value": "@tendu"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "Heure",
+              "as": "HeureMax"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -3,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "HeureMax",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 2,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Stress"
+        },
+        "color": {
+          "value": "@stress"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "Heure",
+              "as": "HeureMax"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -3,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "HeureMax",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 3,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Détresse"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "strokeWidth": 2.6,
+        "interpolate": "monotone"
+      },
+      "encoding": {
+        "x": {
+          "field": "Heure",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%H:%M",
+            "labelAngle": 0,
+            "tickCount": 8,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "LSI",
+          "type": "quantitative",
+          "title": "LSI",
+          "scale": {
+            "domainMin": -1,
+            "nice": false
+          },
+          "axis": {
+            "tickCount": 6,
+            "grid": true
+          }
+        },
+        "color": {
+          "field": "Marche",
+          "type": "nominal",
+          "title": null,
+          "scale": "@marches",
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "title": null,
+            "labelLimit": 220,
+            "symbolType": "circle",
+            "columnPadding": 18,
+            "offset": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Heure",
+            "type": "temporal",
+            "format": "%H:%M",
+            "title": "Heure"
+          },
+          {
+            "field": "Marche",
+            "type": "nominal",
+            "title": "Marché"
+          },
+          {
+            "field": "LSI",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    }
+  ]
+}

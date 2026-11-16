@@ -1,0 +1,140 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Fourchette moyenne par marché et plateforme, profondeur en étiquette.",
+  "width": "container",
+  "height": "container",
+  "transform": [
+    {
+      "calculate": "replace(format(datum.Fourchette, '.2f'), '.', ',') + ' pb'",
+      "as": "TexteFourchette"
+    },
+    {
+      "calculate": "replace(format(datum.Profondeur, '.2f'), '.', ',') + ' M$'",
+      "as": "TexteProfondeur"
+    }
+  ],
+  "encoding": {
+    "x": {
+      "field": "Plateforme",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Binance",
+        "Kraken",
+        "Coinbase"
+      ],
+      "axis": {
+        "orient": "top",
+        "labelFontSize": 13,
+        "labelFontWeight": 600,
+        "domain": false,
+        "ticks": false,
+        "labelAngle": 0
+      }
+    },
+    "y": {
+      "field": "Marche",
+      "type": "nominal",
+      "title": null,
+      "sort": {
+        "field": "Ordre",
+        "op": "min"
+      },
+      "axis": {
+        "labelFontSize": 13,
+        "labelFontWeight": 600,
+        "domain": false,
+        "ticks": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rect",
+        "cornerRadius": 6,
+        "stroke": "@fond",
+        "strokeWidth": 4
+      },
+      "encoding": {
+        "color": {
+          "field": "Fourchette",
+          "type": "quantitative",
+          "scale": {
+            "type": "symlog",
+            "range": [
+              "@calme",
+              "@tendu",
+              "@detresse"
+            ]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "gradientLength": 160,
+            "direction": "horizontal",
+            "labelLimit": 220,
+            "symbolType": "circle",
+            "columnPadding": 18,
+            "offset": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Marche",
+            "type": "nominal",
+            "title": "Marché"
+          },
+          {
+            "field": "Plateforme",
+            "type": "nominal"
+          },
+          {
+            "field": "Fourchette",
+            "type": "quantitative",
+            "format": ".3f",
+            "title": "Fourchette (pb)"
+          },
+          {
+            "field": "Profondeur",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Profondeur ±5 pb (M$)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 14,
+        "fontWeight": 700,
+        "dy": -8,
+        "color": "#071019",
+        "limit": 400
+      },
+      "encoding": {
+        "text": {
+          "field": "TexteFourchette",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 12,
+        "dy": 10,
+        "color": "#071019",
+        "opacity": 0.8,
+        "limit": 400
+      },
+      "encoding": {
+        "text": {
+          "field": "TexteProfondeur",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}

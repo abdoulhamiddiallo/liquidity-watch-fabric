@@ -1,0 +1,14 @@
+// Indicateurs d'anatomie : fourchette, profondeur, dislocation, volatilité et récit.
+EVALUATE
+CALCULATETABLE(
+    ROW(
+        "FourchetteMax", [Fourchette maximale (pb)],
+        "ProfondeurMin", [Profondeur minimale (M$)],
+        "Chute", [Chute de profondeur],
+        "DislocationMax", [Dislocation maximale (pb)],
+        "VolatiliteMax", [Volatilité maximale (pb)],
+        "MinutesTension", [Minutes sous tension],
+        "Recit", [Récit anatomie]
+    )
+    /*,FILTRES*/
+)

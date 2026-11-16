@@ -1,0 +1,106 @@
+/// Écartements anormaux de fourchette par plateforme et marché, au pas de 30 secondes
+table 'Anomalies'
+	lineageTag: 9082ab07-7f74-5d1c-9cb0-f9335dc2b62e
+
+	column 'Clé'
+		dataType: string
+		isHidden
+		lineageTag: b509caad-1c24-5d40-adb2-0f9582da00eb
+		summarizeBy: none
+		sourceColumn: cle
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Horodatage UTC'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn:ss
+		isHidden
+		lineageTag: 94b29238-096f-5cfc-b3d5-6812047a3dd9
+		summarizeBy: none
+		sourceColumn: ts
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Heure'
+		dataType: dateTime
+		formatString: hh:nn:ss
+		lineageTag: afeb2b13-5951-5f8f-8c6d-8c8cd82d5bcd
+		summarizeBy: none
+		sourceColumn: heure
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Minute'
+		dataType: dateTime
+		isHidden
+		lineageTag: b08e22c3-da0b-5e11-b2aa-2eb896decdb6
+		summarizeBy: none
+		sourceColumn: minute
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Code plateforme'
+		dataType: string
+		isHidden
+		lineageTag: f5b3ce19-0eca-5ac0-b244-2d9929f9c8cc
+		summarizeBy: none
+		sourceColumn: venue
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Symbole'
+		dataType: string
+		isHidden
+		lineageTag: 0e90417b-6f0e-5c9e-a57f-d862baac6c74
+		summarizeBy: none
+		sourceColumn: symbol
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fourchette observée (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 5eb6ffdc-a801-544e-b994-47264fddf3bd
+		summarizeBy: none
+		sourceColumn: spread_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fourchette habituelle (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 83626b1d-9f60-5cc3-ad4a-0b553f5cd146
+		summarizeBy: none
+		sourceColumn: attendu_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Excès (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: a0910d65-a62f-57f5-9e10-fefd59bb5d41
+		summarizeBy: none
+		sourceColumn: exces_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Score'
+		dataType: double
+		formatString: 0.0
+		lineageTag: 58833f7c-d8ce-511e-b49f-3d82a895bd6d
+		summarizeBy: none
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Anomalies' = m
+		mode: import
+		source =
+				let
+					Source = AzureDataExplorer.Contents(Cluster, Base, "let p = lw_book_silver | summarize spread = avg(spread_bps) by venue, symbol, t = bin(ts, 30s); let b = p | summarize med = percentile(spread, 50), q1 = percentile(spread, 25), q3 = percentile(spread, 75) by venue, symbol; p | join kind=inner b on venue, symbol | extend echelle = max_of((q3 - q1) / 1.349, med * 0.1, 0.05) | extend score = round((spread - med) / echelle, 1) | where score >= 4 and spread - med >= 0.5 | project cle = strcat(venue, "" "", symbol, "" "", format_datetime(t, ""yyyy-MM-dd HH:mm:ss"")), ts = t, heure = datetime_utc_to_local(t, ""Europe/Paris""), minute = bin(t, 1m), venue, symbol, spread_bps = round(spread, 2), attendu_bps = round(med, 2), exces_bps = round(spread - med, 2), score", [MaxRows = null, MaxSize = null, NoTruncate = null, AdditionalSetStatements = null]),
+					Types = Table.TransformColumnTypes(Source, {{"cle", type text}, {"ts", type datetime}, {"heure", type datetime}, {"minute", type datetime}, {"venue", type text}, {"symbol", type text}, {"spread_bps", type number}, {"attendu_bps", type number}, {"exces_bps", type number}, {"score", type number}}, "en-US")
+				in
+					Types
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "€STR quotidien depuis 2024, en marches d'escalier.",
+  "width": "container",
+  "height": "container",
+  "mark": {
+    "type": "area",
+    "interpolate": "step-after",
+    "opacity": 0.2,
+    "color": "@estr",
+    "line": {
+      "color": "@estr",
+      "strokeWidth": 2.4,
+      "interpolate": "step-after"
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Date",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "labelExpr": "['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][month(datum.value)] + ' ' + year(datum.value)",
+        "labelAngle": 0,
+        "grid": false,
+        "tickCount": 8,
+        "labelFlush": true,
+        "labelOverlap": true
+      }
+    },
+    "y": {
+      "field": "ESTR",
+      "type": "quantitative",
+      "title": "€STR (%)",
+      "scale": {
+        "zero": false
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Date",
+        "type": "temporal",
+        "format": "%d/%m/%Y"
+      },
+      {
+        "field": "ESTR",
+        "type": "quantitative",
+        "format": ".3f",
+        "title": "€STR (%)"
+      }
+    ]
+  }
+}

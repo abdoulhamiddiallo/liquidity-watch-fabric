@@ -1,0 +1,11 @@
+// Fourchette et profondeur moyennes, marché par marché et plateforme par plateforme.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Marché'[Ordre],
+    'Marché'[Marché],
+    'Plateforme'[Plateforme],
+    /*FILTRES,*/
+    "Fourchette", [Fourchette plateforme (pb)],
+    "Profondeur", [Profondeur plateforme (M$)]
+)
+ORDER BY 'Marché'[Ordre], 'Plateforme'[Plateforme]

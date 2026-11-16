@@ -1,0 +1,289 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "VIX quotidien depuis 2024 et seuils de régime.",
+  "width": "container",
+  "height": "container",
+  "layer": [
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.07,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "datum": 20,
+          "type": "quantitative"
+        },
+        "y2": {
+          "datum": 30
+        },
+        "color": {
+          "value": "@stress"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "VIX",
+              "as": "MaxVIX"
+            }
+          ]
+        },
+        {
+          "calculate": "max(datum.MaxVIX + 2, 33)",
+          "as": "Haut"
+        },
+        {
+          "calculate": "30",
+          "as": "Seuil"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.07,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "field": "Seuil",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "Haut"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "area",
+        "opacity": 0.22,
+        "color": "@vix",
+        "line": {
+          "color": "@vix",
+          "strokeWidth": 1.6
+        }
+      },
+      "encoding": {
+        "x": {
+          "field": "Date",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "labelExpr": "['janv.','févr.','mars','avr.','mai','juin','juil.','août','sept.','oct.','nov.','déc.'][month(datum.value)] + ' ' + year(datum.value)",
+            "labelAngle": 0,
+            "grid": false,
+            "tickCount": 8,
+            "labelFlush": true,
+            "labelOverlap": true
+          }
+        },
+        "y": {
+          "field": "VIX",
+          "type": "quantitative",
+          "title": "VIX",
+          "scale": {
+            "zero": true
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "type": "temporal",
+            "format": "%d/%m/%Y"
+          },
+          {
+            "field": "VIX",
+            "type": "quantitative",
+            "format": ".2f"
+          }
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 15,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@calme"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 20,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@stress"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 30,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "Date",
+              "as": "D"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dy": -3,
+        "dx": 4,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "D",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 30,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Stress au-delà de 30"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "Date",
+              "as": "D"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "bottom",
+        "dy": -3,
+        "dx": 4,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "D",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": 20,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Tendu au-delà de 20"
+        },
+        "color": {
+          "value": "@stress"
+        }
+      }
+    }
+  ]
+}

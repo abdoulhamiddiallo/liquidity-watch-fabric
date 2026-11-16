@@ -1,0 +1,11 @@
+// Apport moyen de chaque signal au LSI, minute par minute.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Temps'[Heure],
+    /*FILTRES,*/
+    "Fourchette", [Apport fourchette],
+    "Profondeur", [Apport profondeur],
+    "Dislocation", [Apport dislocation],
+    "Volatilite", [Apport volatilité]
+)
+ORDER BY 'Temps'[Heure]

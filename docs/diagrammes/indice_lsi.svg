@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" font-family="Inter, sans-serif">
+<defs><marker id="ah9AA8BC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA8BC"/></marker><marker id="ah00A3A3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00A3A3"/></marker><marker id="ah0F6CBD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6CBD"/></marker><marker id="ah2E8B57" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"/></marker><marker id="ah7B4FE0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7B4FE0"/></marker><marker id="ahE8590C" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E8590C"/></marker><marker id="ahC99200" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C99200"/></marker><marker id="ah3B5BDB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3B5BDB"/></marker><marker id="ah2B8A3E" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B8A3E"/></marker><marker id="ahE03131" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E03131"/></marker><marker id="ah0B1F3A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0B1F3A"/></marker><filter id="sh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B1F3A" flood-opacity=".12"/></filter><linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF6DA"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient></defs>
+<defs><marker id="ah0B7A75" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0B7A75"/></marker><marker id="ah5C6AC4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C6AC4"/></marker><marker id="ahD6336C" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D6336C"/></marker></defs>
+<rect x="6" y="6" width="988" height="288" rx="18" fill="#F6F8FC"/>
+<rect x="22" y="22" width="230" height="56" rx="11" fill="#fff" stroke="#E8590C" stroke-width="1.6"/>
+<rect x="22" y="22" width="7" height="56" rx="3" fill="#E8590C"/>
+<text x="40" y="42" font-size="8.4" font-weight="800" fill="#E8590C" letter-spacing=".8">FOURCHETTE</text>
+<text x="40" y="58" font-size="10.5" font-weight="800" fill="#0B1F3A">spread_bps</text>
+<text x="40" y="71" font-size="8.4" fill="#5B6B82">plus large = pire</text>
+<line x1="252" y1="50" x2="300" y2="50" stroke="#E8590C" stroke-width="2" marker-end="url(#ahE8590C)"/>
+<rect x="302" y="30" width="170" height="40" rx="9" fill="#fff" stroke="#E8590C" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="387" y="47" font-size="9" font-weight="800" fill="#0B1F3A" text-anchor="middle">écart robuste z</text>
+<text x="387" y="61" font-size="8.2" fill="#5B6B82" text-anchor="middle">(x − médiane) / (IQR / 1,349)</text>
+<path d="M 472 50 L 528 50 L 541 150" fill="none" stroke="#E8590C" stroke-width="2" marker-end="url(#ahE8590C)"/>
+<text x="500" y="44" font-size="9.5" font-weight="800" fill="#E8590C" text-anchor="middle">35 %</text>
+<rect x="22" y="88" width="230" height="56" rx="11" fill="#fff" stroke="#0F6CBD" stroke-width="1.6"/>
+<rect x="22" y="88" width="7" height="56" rx="3" fill="#0F6CBD"/>
+<text x="40" y="108" font-size="8.4" font-weight="800" fill="#0F6CBD" letter-spacing=".8">PROFONDEUR ±5 pb</text>
+<text x="40" y="124" font-size="10.5" font-weight="800" fill="#0B1F3A">depth_5bps</text>
+<text x="40" y="137" font-size="8.4" fill="#5B6B82">plus mince = pire</text>
+<line x1="252" y1="116" x2="300" y2="116" stroke="#0F6CBD" stroke-width="2" marker-end="url(#ah0F6CBD)"/>
+<rect x="302" y="96" width="170" height="40" rx="9" fill="#fff" stroke="#0F6CBD" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="387" y="113" font-size="9" font-weight="800" fill="#0B1F3A" text-anchor="middle">écart robuste z</text>
+<text x="387" y="127" font-size="8.2" fill="#5B6B82" text-anchor="middle">(x − médiane) / (IQR / 1,349)</text>
+<path d="M 472 116 L 528 116 L 541 150" fill="none" stroke="#0F6CBD" stroke-width="2" marker-end="url(#ah0F6CBD)"/>
+<text x="500" y="110" font-size="9.5" font-weight="800" fill="#0F6CBD" text-anchor="middle">35 %</text>
+<rect x="22" y="154" width="230" height="56" rx="11" fill="#fff" stroke="#7B4FE0" stroke-width="1.6"/>
+<rect x="22" y="154" width="7" height="56" rx="3" fill="#7B4FE0"/>
+<text x="40" y="174" font-size="8.4" font-weight="800" fill="#7B4FE0" letter-spacing=".8">DISLOCATION</text>
+<text x="40" y="190" font-size="10.5" font-weight="800" fill="#0B1F3A">disloc_bps</text>
+<text x="40" y="203" font-size="8.4" fill="#5B6B82">prix qui divergent</text>
+<line x1="252" y1="182" x2="300" y2="182" stroke="#7B4FE0" stroke-width="2" marker-end="url(#ah7B4FE0)"/>
+<rect x="302" y="162" width="170" height="40" rx="9" fill="#fff" stroke="#7B4FE0" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="387" y="179" font-size="9" font-weight="800" fill="#0B1F3A" text-anchor="middle">écart robuste z</text>
+<text x="387" y="193" font-size="8.2" fill="#5B6B82" text-anchor="middle">(x − médiane) / (IQR / 1,349)</text>
+<path d="M 472 182 L 528 182 L 541 150" fill="none" stroke="#7B4FE0" stroke-width="2" marker-end="url(#ah7B4FE0)"/>
+<text x="500" y="176" font-size="9.5" font-weight="800" fill="#7B4FE0" text-anchor="middle">15 %</text>
+<rect x="22" y="220" width="230" height="56" rx="11" fill="#fff" stroke="#2E8B57" stroke-width="1.6"/>
+<rect x="22" y="220" width="7" height="56" rx="3" fill="#2E8B57"/>
+<text x="40" y="240" font-size="8.4" font-weight="800" fill="#2E8B57" letter-spacing=".8">VOLATILITÉ</text>
+<text x="40" y="256" font-size="10.5" font-weight="800" fill="#0B1F3A">vol_bps</text>
+<text x="40" y="269" font-size="8.4" fill="#5B6B82">mid qui s&#x27;agite</text>
+<line x1="252" y1="248" x2="300" y2="248" stroke="#2E8B57" stroke-width="2" marker-end="url(#ah2E8B57)"/>
+<rect x="302" y="228" width="170" height="40" rx="9" fill="#fff" stroke="#2E8B57" stroke-width="1.2" stroke-dasharray="4 3"/>
+<text x="387" y="245" font-size="9" font-weight="800" fill="#0B1F3A" text-anchor="middle">écart robuste z</text>
+<text x="387" y="259" font-size="8.2" fill="#5B6B82" text-anchor="middle">(x − médiane) / (IQR / 1,349)</text>
+<path d="M 472 248 L 528 248 L 541 150" fill="none" stroke="#2E8B57" stroke-width="2" marker-end="url(#ah2E8B57)"/>
+<text x="500" y="242" font-size="9.5" font-weight="800" fill="#2E8B57" text-anchor="middle">15 %</text>
+<circle cx="590" cy="150" r="46" fill="#0B1F3A"/>
+<text x="590" y="146" font-size="17" font-weight="900" fill="#fff" text-anchor="middle">LSI</text>
+<text x="590" y="161" font-size="7.6" fill="#9FB4D6" text-anchor="middle">par marché</text>
+<text x="590" y="172" font-size="7.6" fill="#9FB4D6" text-anchor="middle">et par minute</text>
+<line x1="636" y1="150" x2="660" y2="150" stroke="#0B1F3A" stroke-width="2" marker-end="url(#ah0B1F3A)"/>
+<rect x="664" y="46" width="314" height="44" rx="10" fill="#2E8B57"/>
+<text x="680" y="74" font-size="15" font-weight="900" fill="#fff">&lt; 1</text>
+<text x="760" y="74" font-size="12" font-weight="800" fill="#fff">1 · Calme</text>
+<rect x="664" y="100" width="314" height="44" rx="10" fill="#E3A600"/>
+<text x="680" y="128" font-size="15" font-weight="900" fill="#fff">1 à 2</text>
+<text x="760" y="128" font-size="12" font-weight="800" fill="#fff">2 · Tendu</text>
+<rect x="664" y="154" width="314" height="44" rx="10" fill="#E8590C"/>
+<text x="680" y="182" font-size="15" font-weight="900" fill="#fff">2 à 3</text>
+<text x="760" y="182" font-size="12" font-weight="800" fill="#fff">3 · Stress</text>
+<rect x="664" y="208" width="314" height="44" rx="10" fill="#C92A2A"/>
+<text x="680" y="236" font-size="15" font-weight="900" fill="#fff">≥ 3</text>
+<text x="760" y="236" font-size="12" font-weight="800" fill="#fff">4 · Détresse</text>
+<text x="821" y="40" font-size="8.6" font-weight="800" fill="#5B6B82" text-anchor="middle" letter-spacing=".8">NIVEAUX D'ALERTE</text>
+<text x="821" y="282" font-size="8.6" fill="#5B6B82" text-anchor="middle">Chaque écart est borné entre −3 et 10 : un seul signal ne peut pas tout emporter.</text>
+</svg>

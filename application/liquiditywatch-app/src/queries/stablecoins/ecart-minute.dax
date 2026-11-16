@@ -1,0 +1,10 @@
+// Écart au dollar minute par minute, ancrage par ancrage.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Temps'[Heure],
+    'Carnets'[Série],
+    TREATAS({"Stablecoin"}, 'Marché'[Classe]),
+    /*FILTRES,*/
+    "Ecart", [Écart au dollar (pb)]
+)
+ORDER BY 'Temps'[Heure]

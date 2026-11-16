@@ -1,0 +1,15 @@
+// Indicateurs d'ancrage des stablecoins et récit.
+EVALUATE
+CALCULATETABLE(
+    ROW(
+        "PireUSDT", [Pire écart USDT (pb)],
+        "PireUSDC", [Pire écart USDC (pb)],
+        "Habituel", [Écart habituel USDT (pb)],
+        "Plancher", [Prix plancher USDT ($)],
+        "Decrochage", [Minutes en décrochage],
+        "Etat", [État de l'ancrage],
+        "Recit", [Récit stablecoins]
+    ),
+    TREATAS({"Stablecoin"}, 'Marché'[Classe])
+    /*,FILTRES*/
+)

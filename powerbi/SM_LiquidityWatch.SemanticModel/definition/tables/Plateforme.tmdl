@@ -1,0 +1,48 @@
+/// Les 3 plateformes dont les carnets publics sont lus
+table 'Plateforme'
+	lineageTag: 2c238b5b-b47b-525d-b45c-4c7cd25adb77
+
+	column 'Code plateforme'
+		dataType: string
+		lineageTag: 0f936264-2276-5bc0-b9c6-35d7ab4c32f3
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Code plateforme]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Plateforme'
+		dataType: string
+		lineageTag: 91ca367a-f55d-5dd7-8fdd-3fcd2225384f
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Plateforme]
+		sortByColumn: 'Ordre'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Ordre'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 9f1fb400-f067-5934-b36a-c9f1a7302fa5
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Ordre]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Couleur'
+		dataType: string
+		isHidden
+		lineageTag: 72b7d22f-d88b-5aef-bc72-a27a7e767997
+		isNameInferred
+		summarizeBy: none
+		sourceColumn: [Couleur]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Plateforme' = calculated
+		mode: import
+		source = DATATABLE ( "Code plateforme", STRING, "Plateforme", STRING, "Ordre", INTEGER, "Couleur", STRING, { { "BINANCE", "Binance", 1, "#F3BA2F" }, { "KRAKEN", "Kraken", 2, "#8B7CFF" }, { "COINBASE", "Coinbase", 3, "#3B82F6" } } )
+

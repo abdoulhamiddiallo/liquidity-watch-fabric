@@ -1,0 +1,21 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+	annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table 'Temps'
+ref table 'LSI'
+ref table 'Carnets'
+ref table 'Anomalies'
+ref table 'VIX'
+ref table 'Taux €STR'
+ref table 'Marché'
+ref table 'Plateforme'
+ref table 'Mesures'
+

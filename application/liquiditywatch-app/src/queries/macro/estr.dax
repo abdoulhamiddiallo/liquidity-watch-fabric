@@ -1,0 +1,7 @@
+// Taux €STR quotidien depuis janvier 2024.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Taux €STR'[Date],
+    "ESTR", [Taux €STR (%)]
+)
+ORDER BY 'Taux €STR'[Date]

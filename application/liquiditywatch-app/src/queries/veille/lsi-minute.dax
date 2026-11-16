@@ -1,0 +1,9 @@
+// Indice de stress de liquidité minute par minute, par marché.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Temps'[Heure],
+    'Marché'[Marché],
+    /*FILTRES,*/
+    "LSI", [LSI maximal]
+)
+ORDER BY 'Temps'[Heure]

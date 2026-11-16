@@ -1,0 +1,300 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Écart au dollar minute par minute, bandes de surveillance et de décrochage.",
+  "width": "container",
+  "height": "container",
+  "layer": [
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.08,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "datum": -20,
+          "type": "quantitative"
+        },
+        "y2": {
+          "datum": -50
+        },
+        "color": {
+          "value": "@tendu"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "min",
+              "field": "Ecart",
+              "as": "MinEcart"
+            }
+          ]
+        },
+        {
+          "calculate": "min(datum.MinEcart - 8, -60)",
+          "as": "Bas"
+        },
+        {
+          "calculate": "-50",
+          "as": "Seuil"
+        }
+      ],
+      "mark": {
+        "type": "rect",
+        "opacity": 0.08,
+        "strokeWidth": 0
+      },
+      "encoding": {
+        "y": {
+          "field": "Seuil",
+          "type": "quantitative"
+        },
+        "y2": {
+          "field": "Bas"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": -20,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@tendu"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeDash": [
+          6,
+          4
+        ],
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": -50,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "count",
+              "as": "n"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1.5,
+        "opacity": 0.9
+      },
+      "encoding": {
+        "y": {
+          "datum": 0,
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "@texteSecondaire"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "Heure",
+              "as": "HeureMax"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -3,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "HeureMax",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": -20,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Sous surveillance · -20 pb"
+        },
+        "color": {
+          "value": "@tendu"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "max",
+              "field": "Heure",
+              "as": "HeureMax"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "bottom",
+        "dy": -3,
+        "fontSize": 12,
+        "fontWeight": 600,
+        "limit": 400
+      },
+      "encoding": {
+        "x": {
+          "field": "HeureMax",
+          "type": "temporal"
+        },
+        "y": {
+          "datum": -50,
+          "type": "quantitative"
+        },
+        "text": {
+          "value": "Décrochage · -50 pb"
+        },
+        "color": {
+          "value": "@detresse"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "strokeWidth": 3
+      },
+      "encoding": {
+        "x": {
+          "field": "Heure",
+          "type": "temporal",
+          "title": null,
+          "axis": {
+            "format": "%H:%M",
+            "labelAngle": 0,
+            "tickCount": 8,
+            "grid": false
+          }
+        },
+        "y": {
+          "field": "Ecart",
+          "type": "quantitative",
+          "title": "Écart au dollar (pb)",
+          "scale": {
+            "domainMax": 5,
+            "nice": true
+          }
+        },
+        "color": {
+          "field": "Serie",
+          "type": "nominal",
+          "title": null,
+          "scale": "@ancrages",
+          "legend": {
+            "orient": "top",
+            "direction": "horizontal",
+            "title": null,
+            "labelLimit": 220,
+            "symbolType": "circle",
+            "columnPadding": 18,
+            "offset": 6
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Heure",
+            "type": "temporal",
+            "format": "%H:%M",
+            "title": "Heure"
+          },
+          {
+            "field": "Serie",
+            "type": "nominal",
+            "title": "Ancrage"
+          },
+          {
+            "field": "Ecart",
+            "type": "quantitative",
+            "format": ".1f",
+            "title": "Écart (pb)"
+          }
+        ]
+      }
+    }
+  ]
+}

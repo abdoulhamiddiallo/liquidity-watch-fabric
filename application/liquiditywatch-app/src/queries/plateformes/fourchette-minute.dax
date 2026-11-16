@@ -1,0 +1,9 @@
+// Fourchette moyenne minute par minute, plateforme par plateforme.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Temps'[Heure],
+    'Plateforme'[Plateforme],
+    /*FILTRES,*/
+    "Fourchette", [Fourchette plateforme (pb)]
+)
+ORDER BY 'Temps'[Heure]

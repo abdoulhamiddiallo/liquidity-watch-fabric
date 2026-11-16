@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Fourchette minute par minute, par plateforme.",
+  "width": "container",
+  "height": "container",
+  "mark": {
+    "type": "line",
+    "interpolate": "monotone",
+    "strokeWidth": 2.6
+  },
+  "encoding": {
+    "x": {
+      "field": "Heure",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%H:%M",
+        "labelAngle": 0,
+        "tickCount": 8,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "Fourchette",
+      "type": "quantitative",
+      "title": "Fourchette (pb)"
+    },
+    "color": {
+      "field": "Plateforme",
+      "type": "nominal",
+      "title": null,
+      "scale": "@plateformes",
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal",
+        "title": null,
+        "labelLimit": 220,
+        "symbolType": "circle",
+        "columnPadding": 18,
+        "offset": 6
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Heure",
+        "type": "temporal",
+        "format": "%H:%M",
+        "title": "Heure"
+      },
+      {
+        "field": "Plateforme",
+        "type": "nominal"
+      },
+      {
+        "field": "Fourchette",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Fourchette (pb)"
+      }
+    ]
+  }
+}

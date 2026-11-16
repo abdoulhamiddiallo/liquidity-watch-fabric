@@ -1,0 +1,445 @@
+/// Toutes les mesures du rapport, rangées par dossier
+table Mesures
+	lineageTag: 742a905d-1fbb-5d0c-9c57-8206fc7ceb9e
+
+	/// Valeur la plus haute de l'indice de stress sur la sélection
+	measure 'LSI maximal' = MAX ( 'LSI'[LSI] )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: a8aa98bf-d74e-51e6-951f-e19343c52f82
+
+	/// Nombre de couples marché et minute observés
+	measure 'Minutes-marché' = COUNTROWS ( 'LSI' )
+		formatString: #,0
+		displayFolder: 01 Stress
+		lineageTag: c7748bed-3937-586b-a22d-46edbf091659
+
+	measure 'LSI moyen' = AVERAGE ( 'LSI'[LSI] )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: 5b49a3b1-b251-521a-8955-d7593539fcf2
+
+	measure 'Minutes observées' = DISTINCTCOUNT ( 'LSI'[Minute] )
+		formatString: #,0
+		displayFolder: 01 Stress
+		lineageTag: ccac782c-4dca-502c-bffd-08cb31f901be
+
+	/// Minutes où au moins un marché atteint un LSI de 3
+	measure 'Minutes en détresse' = CALCULATE ( DISTINCTCOUNT ( 'LSI'[Minute] ), 'LSI'[LSI] >= 3 ) + 0
+		formatString: #,0
+		displayFolder: 01 Stress
+		lineageTag: d3f56a29-e633-587d-8fcb-06a3707bd480
+
+	measure 'Minutes en stress' = CALCULATE ( DISTINCTCOUNT ( 'LSI'[Minute] ), 'LSI'[LSI] >= 2 ) + 0
+		formatString: #,0
+		displayFolder: 01 Stress
+		lineageTag: d1324952-1ab9-5c51-afb8-e2ba8e34d5f0
+
+	measure 'Minutes sous tension' = CALCULATE ( DISTINCTCOUNT ( 'LSI'[Minute] ), 'LSI'[LSI] >= 1 ) + 0
+		formatString: #,0
+		displayFolder: 01 Stress
+		lineageTag: a7093c2c-4474-50a8-ade4-883a007cd043
+
+	measure 'Part du temps sous tension' = DIVIDE ( [Minutes sous tension], [Minutes observées] )
+		formatString: 0 %
+		displayFolder: 01 Stress
+		lineageTag: 1929b9e9-b3dc-5b3d-affe-9df50b2ace02
+
+	measure 'Marché le plus tendu' =
+			VAR t = TOPN ( 1, FILTER ( VALUES ( 'Marché'[Marché] ), NOT ISBLANK ( [LSI maximal] ) ), [LSI maximal], DESC )
+			RETURN CONCATENATEX ( t, 'Marché'[Marché], ", " )
+		displayFolder: 01 Stress
+		lineageTag: d8f1710b-effd-5b8c-b51e-a5d02f2a38cc
+
+	measure 'Heure du pic' =
+			VAR mx = [LSI maximal]
+			VAR h = MINX ( FILTER ( 'LSI', 'LSI'[LSI] = mx ), RELATED ( 'Temps'[Heure] ) )
+			RETURN IF ( NOT ISBLANK ( h ), FORMAT ( h, "hh:nn" ) )
+		displayFolder: 01 Stress
+		lineageTag: 00540f5d-0256-56a3-ad13-1c6f57637955
+
+	measure 'Niveau au pic' =
+			VAR mx = [LSI maximal]
+			RETURN SWITCH ( TRUE (), ISBLANK ( mx ), BLANK (), mx >= 3, "Détresse", mx >= 2, "Stress", mx >= 1, "Tendu", "Calme" )
+		displayFolder: 01 Stress
+		lineageTag: e94fdb69-653b-55bd-b995-391bbf24dfc4
+
+	measure 'LSI dernier' =
+			VAR t = MAX ( 'LSI'[Minute] )
+			RETURN CALCULATE ( MAX ( 'LSI'[LSI] ), 'LSI'[Minute] = t )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: d51f9de8-fd24-5264-bcaf-3ab5ec47ed5f
+
+	measure 'Apport fourchette' = AVERAGE ( 'LSI'[Apport fourchette] )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: f3938658-700c-51e5-b4df-5e516c6f1875
+
+	measure 'Apport profondeur' = AVERAGE ( 'LSI'[Apport profondeur] )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: bef505b7-5fa5-5b2d-bf05-861dd9908b7f
+
+	measure 'Apport dislocation' = AVERAGE ( 'LSI'[Apport dislocation] )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: 4a9756fa-d793-544c-8ff3-943e2e988adc
+
+	measure 'Apport volatilité' = AVERAGE ( 'LSI'[Apport volatilité] )
+		formatString: 0.00
+		displayFolder: 01 Stress
+		lineageTag: 896e37aa-b7a0-5907-bccc-78e9a7aa911b
+
+	measure 'Rang de tension' =
+			VAR s = MAX ( 'LSI'[LSI] )
+			VAR k = MAX ( 'LSI'[Clé] )
+			RETURN IF ( HASONEVALUE ( 'LSI'[Clé] ),
+			    COUNTROWS ( FILTER ( ALLSELECTED ( 'LSI' ), 'LSI'[LSI] > s || ( 'LSI'[LSI] = s && 'LSI'[Clé] < k ) ) ) + 1 )
+		formatString: 0
+		displayFolder: 01 Stress
+		lineageTag: fbdfb36b-5d61-5646-b686-53dc18e7c037
+
+	measure 'Fourchette moyenne (pb)' = AVERAGE ( 'LSI'[Fourchette (pb)] )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: 9e6f335f-b31a-5cf4-a502-44565720fcaa
+
+	measure 'Fourchette maximale (pb)' = MAX ( 'LSI'[Fourchette (pb)] )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: 5198de1d-829a-52c0-9589-53f479ac7d20
+
+	/// Profondeur moyenne cumulée des carnets à ±5 pb du prix médian, en millions de dollars
+	measure 'Profondeur ±5 pb (M$)' = DIVIDE ( AVERAGEX ( VALUES ( 'LSI'[Minute] ), CALCULATE ( SUM ( 'LSI'[Profondeur ±5 pb ($)] ) ) ), 1000000 )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: 8a8ac6fb-576c-519f-8238-4ecf3247aa31
+
+	measure 'Profondeur minimale (M$)' = DIVIDE ( MINX ( VALUES ( 'LSI'[Minute] ), CALCULATE ( SUM ( 'LSI'[Profondeur ±5 pb ($)] ) ) ), 1000000 )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: 32d85496-6ff7-5f40-a732-16540735b77d
+
+	measure 'Profondeur cumulée (M$)' = DIVIDE ( SUM ( 'LSI'[Profondeur ±5 pb ($)] ), 1000000 )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: b7e27f70-93f3-57e5-bcd4-ad4d63f3e02d
+
+	measure 'Chute de profondeur' = IF ( NOT ISBLANK ( [Profondeur ±5 pb (M$)] ), 1 - DIVIDE ( [Profondeur minimale (M$)], [Profondeur ±5 pb (M$)] ) )
+		formatString: 0 %
+		displayFolder: 02 Liquidité
+		lineageTag: 8b1d3d85-ad8e-5f91-9a40-c757046cb913
+
+	measure 'Dislocation maximale (pb)' = MAX ( 'LSI'[Dislocation (pb)] )
+		formatString: 0.0
+		displayFolder: 02 Liquidité
+		lineageTag: 83bc5151-060e-5ce8-a7f1-fdc02b18f77b
+
+	measure 'Dislocation moyenne (pb)' = AVERAGE ( 'LSI'[Dislocation (pb)] )
+		formatString: 0.0
+		displayFolder: 02 Liquidité
+		lineageTag: 9ef47cfa-c62e-5327-80d6-56b9b3755310
+
+	measure 'Volatilité moyenne (pb)' = AVERAGE ( 'LSI'[Volatilité (pb)] )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: 0ff7a33c-7562-5bef-be93-3d54a1f963d2
+
+	measure 'Volatilité maximale (pb)' = MAX ( 'LSI'[Volatilité (pb)] )
+		formatString: 0.00
+		displayFolder: 02 Liquidité
+		lineageTag: f224c90a-61b2-5064-a08e-7da4e60e1fd1
+
+	measure 'Déséquilibre moyen' = AVERAGE ( 'LSI'[Déséquilibre] )
+		formatString: +0.000;-0.000;0.000
+		displayFolder: 02 Liquidité
+		lineageTag: abfac491-37b1-56bf-827e-27dbd5e3f740
+
+	measure 'Carnets analysés' = SUM ( 'Carnets'[Carnets] )
+		formatString: #,0
+		displayFolder: 03 Plateformes
+		lineageTag: 06d178b8-da05-5132-94f1-c303dfd8143f
+
+	measure 'Carnets par minute' = DIVIDE ( [Carnets analysés], DISTINCTCOUNT ( 'Carnets'[Minute] ) )
+		formatString: #,0
+		displayFolder: 03 Plateformes
+		lineageTag: e8722f5e-be79-521e-9ad6-e3cd2f74a4a6
+
+	measure 'Latence moyenne (ms)' = DIVIDE ( SUMX ( 'Carnets', 'Carnets'[Latence (ms)] * 'Carnets'[Carnets] ), [Carnets analysés] )
+		formatString: #,0
+		displayFolder: 03 Plateformes
+		lineageTag: 95f2a47e-a6f3-5fe7-a1a2-0e8edf9314b2
+
+	measure 'Plateformes actives' = DISTINCTCOUNT ( 'Carnets'[Code plateforme] )
+		formatString: 0
+		displayFolder: 03 Plateformes
+		lineageTag: d68d710c-2eae-518a-bbee-3c683b9728c1
+
+	measure 'Marchés suivis' = DISTINCTCOUNT ( 'Carnets'[Symbole] )
+		formatString: 0
+		displayFolder: 03 Plateformes
+		lineageTag: 7a00abe7-3971-5fc9-ba2b-67650880c630
+
+	measure 'Fourchette plateforme (pb)' = AVERAGE ( 'Carnets'[Fourchette (pb)] )
+		formatString: 0.00
+		displayFolder: 03 Plateformes
+		lineageTag: f44be6c4-0138-5709-9aad-0a2061a42327
+
+	measure 'Profondeur plateforme (M$)' = DIVIDE ( AVERAGEX ( VALUES ( 'Carnets'[Minute] ), CALCULATE ( SUM ( 'Carnets'[Profondeur ±5 pb ($)] ) ) ), 1000000 )
+		formatString: 0.00
+		displayFolder: 03 Plateformes
+		lineageTag: 943197fe-ce3b-5b96-8986-4da03b666058
+
+	measure 'Anomalies détectées' = COUNTROWS ( 'Anomalies' ) + 0
+		formatString: #,0
+		displayFolder: 03 Plateformes
+		lineageTag: 6865ee39-ba1e-525b-959f-4f3e5070541c
+
+	measure 'Excès maximal (pb)' = MAX ( 'Anomalies'[Excès (pb)] )
+		formatString: 0.00
+		displayFolder: 03 Plateformes
+		lineageTag: b7ce82a7-33b6-51cd-b68c-3fb3876f3ee2
+
+	measure 'Rang anomalie' =
+			VAR s = MAX ( 'Anomalies'[Score] )
+			VAR k = MAX ( 'Anomalies'[Clé] )
+			RETURN IF ( HASONEVALUE ( 'Anomalies'[Clé] ),
+			    COUNTROWS ( FILTER ( ALLSELECTED ( 'Anomalies' ), 'Anomalies'[Score] > s || ( 'Anomalies'[Score] = s && 'Anomalies'[Clé] < k ) ) ) + 1 )
+		formatString: 0
+		displayFolder: 03 Plateformes
+		lineageTag: 758e3f84-beb4-5285-8d93-39f62a8c1cfc
+
+	measure 'Écart au dollar (pb)' = AVERAGE ( 'Carnets'[Écart au dollar (pb)] )
+		formatString: 0.0
+		displayFolder: 04 Stablecoins
+		lineageTag: 8b3aad3a-de91-56b6-9f0a-a716557f0868
+
+	measure 'Pire écart au dollar (pb)' = MIN ( 'Carnets'[Écart minimal (pb)] )
+		formatString: 0.0
+		displayFolder: 04 Stablecoins
+		lineageTag: af344c3a-bdec-5078-a003-caadbfde08c6
+
+	measure 'Pire écart USDT (pb)' = CALCULATE ( MIN ( 'Carnets'[Écart minimal (pb)] ), 'Marché'[Symbole] = "USDT-USD" )
+		formatString: 0.0
+		displayFolder: 04 Stablecoins
+		lineageTag: b49dee97-5b8d-5f5b-9f8b-ae47dde47c2f
+
+	measure 'Pire écart USDC (pb)' = CALCULATE ( MIN ( 'Carnets'[Écart minimal (pb)] ), 'Marché'[Symbole] = "USDC-USD" )
+		formatString: 0.0
+		displayFolder: 04 Stablecoins
+		lineageTag: a3f10f61-c9c6-5023-a1b4-87f5c3f2e460
+
+	/// Médiane de l'écart de l'USDT au dollar hors fenêtre de choc : la base USDT/USD ordinaire
+	measure 'Écart habituel USDT (pb)' = CALCULATE ( MEDIAN ( 'Carnets'[Écart au dollar (pb)] ), 'Marché'[Symbole] = "USDT-USD", 'Carnets'[Choc] = 0 )
+		formatString: 0.0
+		displayFolder: 04 Stablecoins
+		lineageTag: 3ae86690-1d17-5690-96c9-f3a27bc9b349
+
+	measure 'Minutes en décrochage' = CALCULATE ( DISTINCTCOUNT ( 'Carnets'[Minute] ), 'Carnets'[État] = "Décrochage" ) + 0
+		formatString: #,0
+		displayFolder: 04 Stablecoins
+		lineageTag: c7f00b97-43ed-5436-85d3-7dfc3f94fc40
+
+	measure 'Prix plancher USDT ($)' = CALCULATE ( MIN ( 'Carnets'[Prix minimal] ), 'Marché'[Symbole] = "USDT-USD" )
+		formatString: 0.0000
+		displayFolder: 04 Stablecoins
+		lineageTag: 9a12d786-37bb-5500-acb8-9ffb9aeea91f
+
+	measure 'État de l''ancrage' =
+			VAR e = [Pire écart au dollar (pb)]
+			RETURN SWITCH ( TRUE (), ISBLANK ( e ), BLANK (), ABS ( e ) >= 50, "Décrochage", ABS ( e ) >= 20, "Sous surveillance", "Ancré" )
+		displayFolder: 04 Stablecoins
+		lineageTag: 76204129-4cd8-5418-be9a-5cba30c1f453
+
+	measure 'VIX dernière clôture' =
+			VAR d = MAX ( 'VIX'[Date] )
+			RETURN CALCULATE ( MAX ( 'VIX'[VIX] ), 'VIX'[Date] = d )
+		formatString: 0.00
+		displayFolder: 05 Contexte macro
+		lineageTag: 25875676-fd6c-5164-901a-e41474d173ae
+
+	measure 'Régime VIX' =
+			VAR d = MAX ( 'VIX'[Date] )
+			RETURN CALCULATE ( MAX ( 'VIX'[Régime] ), 'VIX'[Date] = d )
+		displayFolder: 05 Contexte macro
+		lineageTag: 617a2ca0-08e5-5eca-9eb1-2ff7ad75445b
+
+	measure 'VIX moyen' = AVERAGE ( 'VIX'[VIX] )
+		formatString: 0.00
+		displayFolder: 05 Contexte macro
+		lineageTag: 8333d62d-aa4a-5a1c-8e28-3c0754f22a7e
+
+	measure 'VIX maximal' = MAX ( 'VIX'[VIX] )
+		formatString: 0.00
+		displayFolder: 05 Contexte macro
+		lineageTag: f741da96-761c-5e63-9c5c-cd657c8f6b01
+
+	measure 'Date du VIX maximal' =
+			VAR mx = [VIX maximal]
+			RETURN FORMAT ( CALCULATE ( MIN ( 'VIX'[Date] ), 'VIX'[VIX] = mx ), "dd/mm/yyyy" )
+		displayFolder: 05 Contexte macro
+		lineageTag: 11c61ccb-dabe-5caa-9f1f-dc3ed8544c69
+
+	measure '€STR dernier (%)' =
+			VAR d = MAX ( 'Taux €STR'[Date] )
+			RETURN CALCULATE ( MAX ( 'Taux €STR'[€STR (%)] ), 'Taux €STR'[Date] = d )
+		formatString: 0.000
+		displayFolder: 05 Contexte macro
+		lineageTag: 49aecae7-e09f-58d9-9e65-42ded89c9ef2
+
+	measure 'Variation €STR (pb)' =
+			VAR d = MAX ( 'Taux €STR'[Date] )
+			RETURN CALCULATE ( MAX ( 'Taux €STR'[Variation (pb)] ), 'Taux €STR'[Date] = d )
+		formatString: +0.0;-0.0;0.0
+		displayFolder: 05 Contexte macro
+		lineageTag: 2b1f012e-09fe-5e64-9d4d-b5f77008f0e7
+
+	measure '€STR il y a un an (%)' =
+			VAR d = MAX ( 'Taux €STR'[Date] )
+			VAR d1 = CALCULATE ( MAX ( 'Taux €STR'[Date] ), 'Taux €STR'[Date] <= EDATE ( d, -12 ) )
+			RETURN CALCULATE ( MAX ( 'Taux €STR'[€STR (%)] ), 'Taux €STR'[Date] = d1 )
+		formatString: 0.000
+		displayFolder: 05 Contexte macro
+		lineageTag: 6824a4a5-18f9-57ac-9742-21dd63b9ab9d
+
+	measure 'Évolution €STR sur un an (pb)' = ( [€STR dernier (%)] - [€STR il y a un an (%)] ) * 100
+		formatString: +0;-0;0
+		displayFolder: 05 Contexte macro
+		lineageTag: e0b5fd06-2aed-5353-8cb0-b31718edd886
+
+	measure 'Couleur LSI' =
+			VAR mx = [LSI maximal]
+			RETURN SWITCH ( TRUE (), ISBLANK ( mx ), "#1A2440", mx >= 3, "#EF5350", mx >= 2, "#F59E3B", mx >= 1, "#F5C451", "#34C38F" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 05cd4632-bda0-5015-ac42-15a96b5d4a37
+
+	measure 'Couleur LSI dernier' =
+			VAR mx = [LSI dernier]
+			RETURN SWITCH ( TRUE (), ISBLANK ( mx ), "#1A2440", mx >= 3, "#EF5350", mx >= 2, "#F59E3B", mx >= 1, "#F5C451", "#34C38F" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: f1929512-f4e2-5a6c-ba26-4faf38b0b45a
+
+	measure 'Couleur ancrage' =
+			VAR e = [Pire écart au dollar (pb)]
+			RETURN SWITCH ( TRUE (), ISBLANK ( e ), "#1A2440", ABS ( e ) >= 50, "#EF5350", ABS ( e ) >= 20, "#F5C451", "#34C38F" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 2baaa6b5-e230-5a6f-8c0c-ef73cbda001f
+
+	measure 'Couleur plateforme' = SELECTEDVALUE ( 'Plateforme'[Couleur], "#2DD4BF" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 92223164-1293-5696-90aa-5e861c06375f
+
+	measure 'Couleur marché' = SELECTEDVALUE ( 'Marché'[Couleur], "#2DD4BF" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: e82b5fdc-a893-5572-8655-7e1e697ef675
+
+	measure 'Couleur régime VIX' = SWITCH ( [Régime VIX], "Calme", "#34C38F", "Normal", "#2DD4BF", "Tendu", "#F59E3B", "Stress", "#EF5350", "#93A3BF" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 8ebf9601-7e3a-5f1d-a8ff-1a990a5565aa
+
+	measure 'Période couverte' =
+			VAR a = MIN ( 'Temps'[Heure] )
+			VAR b = MAX ( 'Temps'[Heure] )
+			RETURN IF ( NOT ISBLANK ( a ), "Carnets du " & FORMAT ( a, "dd/mm/yyyy" ) & " · " & [Minutes observées] & " minutes captées entre " & FORMAT ( a, "hh:nn" ) & " et " & FORMAT ( b, "hh:nn" ) & ", heure de Paris" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: f5451ab4-a522-52e2-ad10-73316db196db
+
+	measure 'Récit synthèse' =
+			VAR mx = [LSI maximal]
+			VAR u = [Pire écart USDT (pb)]
+			VAR nd = [Minutes en détresse]
+			VAR txt_u = IF ( NOT ISBLANK ( u ), "  ·  Pire écart de l'USDT au dollar : " & FORMAT ( u, "0.0" ) & " pb." )
+			RETURN IF ( ISBLANK ( mx ), "Aucune minute de cryptoactif dans cette sélection.",
+			    "Pic de stress : " & [Marché le plus tendu] & ", LSI " & FORMAT ( mx, "0.00" ) & " à " & [Heure du pic] & " (" & LOWER ( [Niveau au pic] ) & ")"
+			    & "  ·  " & nd & IF ( nd > 1, " minutes", " minute" ) & " en détresse sur " & [Minutes observées] & " observées" & IF ( ISBLANK ( txt_u ), ".", txt_u ) )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 94fa7a51-2aef-57fd-a0d5-311ab4dadfe7
+
+	measure 'Signal dominant' =
+			VAR t = { ( "la fourchette", [Apport fourchette] ), ( "la profondeur", [Apport profondeur] ), ( "la dislocation", [Apport dislocation] ), ( "la volatilité", [Apport volatilité] ) }
+			RETURN MAXX ( TOPN ( 1, t, [Value2], DESC ), [Value1] )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: b1b600f5-d3b2-5765-a173-b52f9d3aa1b4
+
+	measure 'Récit anatomie' =
+			VAR pos = MAX ( [Apport fourchette], 0 ) + MAX ( [Apport profondeur], 0 ) + MAX ( [Apport dislocation], 0 ) + MAX ( [Apport volatilité], 0 )
+			VAR best = MAXX ( { [Apport fourchette], [Apport profondeur], [Apport dislocation], [Apport volatilité] }, [Value] )
+			RETURN IF ( ISBLANK ( [LSI maximal] ), "Aucune minute de cryptoactif dans cette sélection.",
+			    "Sur la sélection, le stress vient d'abord de " & [Signal dominant] & " (" & FORMAT ( DIVIDE ( MAX ( best, 0 ), pos ), "0 %" ) & " de l'apport positif moyen)"
+			    & "  ·  Fourchette au plus haut : " & FORMAT ( [Fourchette maximale (pb)], "0.0" ) & " pb  ·  Profondeur au plus bas : " & FORMAT ( [Profondeur minimale (M$)], "0.00" ) & " M$." )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: e8ce4a43-96a0-52f4-ac84-d20bb06aeec0
+
+	measure 'Plateforme la plus rapide' = MAXX ( TOPN ( 1, FILTER ( VALUES ( 'Plateforme'[Plateforme] ), NOT ISBLANK ( [Latence moyenne (ms)] ) ), [Latence moyenne (ms)], ASC ), 'Plateforme'[Plateforme] )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 8713c6d7-762c-5b44-9960-c1aee1a99231
+
+	measure 'Plateforme la plus lente' = MAXX ( TOPN ( 1, FILTER ( VALUES ( 'Plateforme'[Plateforme] ), NOT ISBLANK ( [Latence moyenne (ms)] ) ), [Latence moyenne (ms)], DESC ), 'Plateforme'[Plateforme] )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: b3e684e7-e178-5f70-86e0-c0bf02397802
+
+	measure 'Récit plateformes' =
+			VAR f = [Plateforme la plus rapide]
+			VAR s = [Plateforme la plus lente]
+			VAR lf = CALCULATE ( [Latence moyenne (ms)], 'Plateforme'[Plateforme] = f )
+			VAR ls = CALCULATE ( [Latence moyenne (ms)], 'Plateforme'[Plateforme] = s )
+			RETURN IF ( ISBLANK ( [Carnets analysés] ), "Aucun carnet dans cette sélection.",
+			    FORMAT ( [Carnets analysés], "#,0" ) & " carnets lus sur " & [Plateformes actives] & " plateformes  ·  " & f & " répond en " & FORMAT ( lf, "#,0" ) & " ms, "
+			    & s & " en " & FORMAT ( ls, "#,0" ) & " ms  ·  " & [Anomalies détectées] & " écartements anormaux de fourchette détectés." )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: c9cfabac-7795-59dc-9e49-5750edd4cb53
+
+	measure 'Récit stablecoins' =
+			VAR h = [Écart habituel USDT (pb)]
+			VAR u = [Pire écart USDT (pb)]
+			VAR d = [Minutes en décrochage]
+			RETURN IF ( ISBLANK ( u ), "Sélectionnez l'USDT pour lire son ancrage.",
+			    "Hors choc, l'USDT cote " & FORMAT ( h, "0.0" ) & " pb face au dollar : c'est la base USDT/USD ordinaire  ·  Au plus bas : " & FORMAT ( u, "0.0" ) & " pb"
+			    & IF ( d > 0, ", soit " & d & IF ( d > 1, " minutes", " minute" ) & " en décrochage.", ", sans décrochage." ) )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: d6272df2-081a-5cc1-b710-c821a07fc939
+
+	measure 'Récit macro' =
+			"VIX à " & FORMAT ( [VIX dernière clôture], "0.0" ) & " le " & FORMAT ( MAX ( 'VIX'[Date] ), "dd/mm/yyyy" ) & " : régime « " & [Régime VIX] & " »"
+			& "  ·  €STR à " & FORMAT ( [€STR dernier (%)], "0.000" ) & " % (" & FORMAT ( [Variation €STR (pb)], "+0.0;-0.0;0.0" ) & " pb sur la veille, "
+			& FORMAT ( [Évolution €STR sur un an (pb)], "+0;-0;0" ) & " pb sur un an)  ·  VIX moyen depuis janvier 2024 : " & FORMAT ( [VIX moyen], "0.0" ) & "."
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 620c8b45-7043-5e9e-bf13-c104516a8351
+
+	measure 'VIX (clôture)' = AVERAGE ( 'VIX'[VIX] )
+		formatString: 0.00
+		displayFolder: 05 Contexte macro
+		lineageTag: 7a1c2d10-5f3e-4b8a-9c11-0e2f3a4b5c61
+
+	measure 'Taux €STR (%)' = AVERAGE ( 'Taux €STR'[€STR (%)] )
+		formatString: 0.000
+		displayFolder: 05 Contexte macro
+		lineageTag: 7a1c2d10-5f3e-4b8a-9c11-0e2f3a4b5c62
+
+	measure 'Couleur texte carte de chaleur' =
+			VAR mx = [LSI maximal]
+			RETURN IF ( NOT ISBLANK ( mx ) && mx >= 1, "#0B1220", "#FFFFFF" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 7a1c2d10-5f3e-4b8a-9c11-0e2f3a4b5c63
+
+	measure 'Dernier carnet reçu' =
+			VAR h = CALCULATE ( MAX ( 'Temps'[Heure] ), 'Carnets' )
+			RETURN IF ( NOT ISBLANK ( h ), "●  Dernier carnet reçu le " & FORMAT ( h, "dd/mm/yyyy" ) & " à " & FORMAT ( h, "hh:nn" ) & ", heure de Paris" )
+		displayFolder: 06 Textes et couleurs
+		lineageTag: 7a1c2d10-5f3e-4b8a-9c11-0e2f3a4b5c64
+
+	column Placeholder
+		dataType: string
+		isHidden
+		lineageTag: ae9fb2f9-46f7-52cb-b01d-9a9440c2efe4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Placeholder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Mesures = calculated
+		mode: import
+		source = ROW ( "Placeholder", "" )
+

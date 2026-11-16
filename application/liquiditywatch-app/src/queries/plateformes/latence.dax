@@ -1,0 +1,10 @@
+// Temps de réponse moyen de chaque plateforme.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Plateforme'[Ordre],
+    'Plateforme'[Plateforme],
+    /*FILTRES,*/
+    "Latence", [Latence moyenne (ms)],
+    "Carnets", [Carnets analysés]
+)
+ORDER BY [Latence]

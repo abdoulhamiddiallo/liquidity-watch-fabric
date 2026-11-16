@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Apport de chaque signal au LSI, en aires empilées.",
+  "width": "container",
+  "height": "container",
+  "transform": [
+    {
+      "fold": [
+        "Fourchette",
+        "Profondeur",
+        "Dislocation",
+        "Volatilite"
+      ],
+      "as": [
+        "Signal",
+        "Apport"
+      ]
+    },
+    {
+      "calculate": "datum.Signal === 'Volatilite' ? 'Volatilité' : datum.Signal",
+      "as": "Signal"
+    }
+  ],
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone",
+    "opacity": 0.85,
+    "line": {
+      "strokeWidth": 1.2
+    }
+  },
+  "encoding": {
+    "x": {
+      "field": "Heure",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%H:%M",
+        "labelAngle": 0,
+        "tickCount": 8,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "Apport",
+      "type": "quantitative",
+      "stack": "zero",
+      "title": "Points d'indice"
+    },
+    "color": {
+      "field": "Signal",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "Fourchette",
+        "Profondeur",
+        "Dislocation",
+        "Volatilité"
+      ],
+      "scale": {
+        "domain": [
+          "Fourchette",
+          "Profondeur",
+          "Dislocation",
+          "Volatilité"
+        ],
+        "range": [
+          "@fourchette",
+          "@profondeur",
+          "@dislocation",
+          "@volatilite"
+        ]
+      },
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal",
+        "title": null,
+        "labelLimit": 220,
+        "symbolType": "circle",
+        "columnPadding": 18,
+        "offset": 6
+      }
+    },
+    "order": {
+      "field": "Signal",
+      "sort": "ascending"
+    },
+    "tooltip": [
+      {
+        "field": "Heure",
+        "type": "temporal",
+        "format": "%H:%M",
+        "title": "Heure"
+      },
+      {
+        "field": "Signal",
+        "type": "nominal"
+      },
+      {
+        "field": "Apport",
+        "type": "quantitative",
+        "format": ".2f",
+        "title": "Apport"
+      }
+    ]
+  }
+}

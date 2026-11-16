@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 420" font-family="Inter, sans-serif">
+<defs><marker id="ah9AA8BC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA8BC"/></marker><marker id="ah00A3A3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00A3A3"/></marker><marker id="ah0F6CBD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6CBD"/></marker><marker id="ah2E8B57" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"/></marker><marker id="ah7B4FE0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7B4FE0"/></marker><marker id="ahE8590C" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E8590C"/></marker><marker id="ahC99200" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C99200"/></marker><marker id="ah3B5BDB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3B5BDB"/></marker><marker id="ah2B8A3E" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B8A3E"/></marker><marker id="ahE03131" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E03131"/></marker><marker id="ah0B1F3A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0B1F3A"/></marker><filter id="sh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B1F3A" flood-opacity=".12"/></filter><linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF6DA"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient></defs>
+<defs><marker id="ah0B7A75" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0B7A75"/></marker><marker id="ah5C6AC4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C6AC4"/></marker><marker id="ahD6336C" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D6336C"/></marker><marker id="ah0F9D8A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F9D8A"/></marker><marker id="ah1F2328" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2328"/></marker></defs>
+<rect x="6" y="6" width="988" height="408" rx="18" fill="#F6F8FA" stroke="#D0D7DE"/>
+<rect x="6" y="6" width="988" height="44" rx="18" fill="#1F2328"/><rect x="6" y="30" width="988" height="20" fill="#1F2328"/>
+<path transform="translate(22,17) scale(1.3)" fill="#FFFFFF" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+<text x="52" y="34" font-size="12" font-weight="800" fill="#FFFFFF" font-family="DejaVu Sans Mono, monospace">github.com/abdoulhamiddiallo/liquidity-watch-fabric</text>
+<text x="978" y="34" font-size="9" font-weight="700" fill="#9FB4D6" text-anchor="end">dépôt public · tout le projet, prêt à reproduire</text>
+<path d="M30 63 h7 l2 2 h9 v11 h-18 z" fill="#00A3A3"/>
+<text x="56" y="74" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">notebooks/</text>
+<path d="M42 85.5 V98.5 H52" fill="none" stroke="#AFB8C1" stroke-width="1.2"/>
+<path d="M58 90.5 h9 l5 5 v12 h-14 z" fill="#FFFFFF" stroke="#00A3A3" stroke-width="1.3"/>
+<text x="82" y="102.5" font-size="10.4" font-weight="600" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">NB_02_Macro_Context.ipynb</text>
+<text x="560" y="102.5" font-size="9.2" fill="#5B6B82">le climat de marché : €STR et VIX dans le lakehouse</text>
+<rect x="488" y="90.5" width="58" height="17" rx="8.5" fill="#00A3A3"/><text x="517" y="102.5" font-size="8.4" font-weight="800" fill="#FFFFFF" text-anchor="middle">étape 3</text>
+<path d="M42 114.0 V127.0 H52" fill="none" stroke="#AFB8C1" stroke-width="1.2"/>
+<path d="M58 119.0 h9 l5 5 v12 h-14 z" fill="#FFFFFF" stroke="#00A3A3" stroke-width="1.3"/>
+<text x="82" y="131.0" font-size="10.4" font-weight="600" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">NB_01_Liquidity_Producer.ipynb</text>
+<text x="560" y="131.0" font-size="9.2" fill="#5B6B82">le producteur : 12 carnets toutes les 5 secondes</text>
+<rect x="488" y="119.0" width="58" height="17" rx="8.5" fill="#00A3A3"/><text x="517" y="131.0" font-size="8.4" font-weight="800" fill="#FFFFFF" text-anchor="middle">étape 5</text>
+<path d="M30 148.5 h7 l2 2 h9 v11 h-18 z" fill="#E8590C"/>
+<text x="56" y="159.5" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">kql/</text>
+<path d="M42 171.0 V184.0 H52" fill="none" stroke="#AFB8C1" stroke-width="1.2"/>
+<path d="M58 176.0 h9 l5 5 v12 h-14 z" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.3"/>
+<text x="82" y="188.0" font-size="10.4" font-weight="600" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">KQL_LiquidityWatch.kql</text>
+<text x="560" y="188.0" font-size="9.2" fill="#5B6B82">10 blocs : Silver, vue matérialisée, indice, signaux, macro</text>
+<rect x="488" y="176.0" width="58" height="17" rx="8.5" fill="#E8590C"/><text x="517" y="188.0" font-size="8.4" font-weight="800" fill="#FFFFFF" text-anchor="middle">étape 7</text>
+<path d="M42 199.5 V212.5 H52" fill="none" stroke="#AFB8C1" stroke-width="1.2"/>
+<path d="M58 204.5 h9 l5 5 v12 h-14 z" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.3"/>
+<text x="82" y="216.5" font-size="10.4" font-weight="600" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">RTD_LiquidityWatch.kql</text>
+<text x="560" y="216.5" font-size="9.2" fill="#5B6B82">les 12 requêtes du tableau de bord temps réel</text>
+<rect x="488" y="204.5" width="58" height="17" rx="8.5" fill="#E8590C"/><text x="517" y="216.5" font-size="8.4" font-weight="800" fill="#FFFFFF" text-anchor="middle">étape 9</text>
+<path d="M30 234.0 h7 l2 2 h9 v11 h-18 z" fill="#C99200"/>
+<text x="56" y="245.0" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">powerbi/</text>
+<path d="M42 256.5 V269.5 H52" fill="none" stroke="#AFB8C1" stroke-width="1.2"/>
+<path d="M56 262.5 h7 l2 2 h9 v11 h-18 z" fill="#C99200"/>
+<text x="82" y="273.5" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">SM_LiquidityWatch.SemanticModel/</text>
+<text x="560" y="273.5" font-size="9.2" fill="#5B6B82">le modèle sémantique au format TMDL</text>
+<path d="M42 285.0 V298.0 H52" fill="none" stroke="#AFB8C1" stroke-width="1.2"/>
+<path d="M56 291.0 h7 l2 2 h9 v11 h-18 z" fill="#C99200"/>
+<text x="82" y="302.0" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">RPT_LiquidityWatch.Report/</text>
+<text x="560" y="302.0" font-size="9.2" fill="#5B6B82">le rapport Power BI de 5 pages, au format PBIR</text>
+<path d="M30 319.5 h7 l2 2 h9 v11 h-18 z" fill="#0F9D8A"/>
+<text x="56" y="330.5" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">application/liquiditywatch-app/</text>
+<text x="560" y="330.5" font-size="9.2" fill="#5B6B82">la Fabric App Rayfin : 7 écrans, React, Vega-Lite</text>
+<path d="M30 348.0 h7 l2 2 h9 v11 h-18 z" fill="#0B1F3A"/>
+<text x="56" y="359.0" font-size="10.4" font-weight="800" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">docs/</text>
+<text x="560" y="359.0" font-size="9.2" fill="#5B6B82">le guide PDF, les diagrammes, les captures et les GIF</text>
+<path d="M32 375.5 h9 l5 5 v12 h-14 z" fill="#FFFFFF" stroke="#0B1F3A" stroke-width="1.3"/>
+<text x="56" y="387.5" font-size="10.4" font-weight="600" fill="#0B1F3A" font-family="DejaVu Sans Mono, monospace">README.md</text>
+<text x="560" y="387.5" font-size="9.2" fill="#5B6B82">la présentation du projet</text>
+</svg>

@@ -1,0 +1,7 @@
+activeProfile: default
+profiles:
+  default:
+    semanticModels:
+      liquidite:
+        workspaceId: <ID_DE_VOTRE_ESPACE_DE_TRAVAIL>
+        itemId: <ID_DU_MODELE_SEMANTIQUE>

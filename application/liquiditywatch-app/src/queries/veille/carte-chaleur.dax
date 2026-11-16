@@ -1,0 +1,10 @@
+// Carte de chaleur : LSI le plus haut par marché et par tranche de 5 minutes.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Marché'[Ordre],
+    'Marché'[Marché],
+    'Temps'[Tranche de 5 min],
+    /*FILTRES,*/
+    "LSI", [LSI maximal]
+)
+ORDER BY 'Temps'[Tranche de 5 min], 'Marché'[Ordre]

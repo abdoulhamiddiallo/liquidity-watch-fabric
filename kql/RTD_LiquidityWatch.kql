@@ -1,0 +1,54 @@
+// LIQUIDITY WATCH | RTD_LiquidityWatch : une requête par vignette (titre · visuel), source EH_LiquidityWatch
+
+// 01 · Indice de stress de liquidité · Tableau
+LW_StressIndex(90)
+| summarize arg_max(minute, *) by symbol
+| project ["Marché"] = symbol, ["LSI"] = lsi, ["Niveau"] = niveau, ["Fourchette (pb)"] = spread_bps, ["Profondeur ±5 pb ($)"] = depth_5bps, ["Dislocation (pb)"] = disloc_bps
+
+// 02 · LSI minute par minute · Graphique en courbes
+LW_StressIndex(90)
+| project minute, symbol, lsi
+| order by minute asc
+
+// 03 · Fourchette consolidée (pb) · Graphique en courbes
+LW_MinuteMetrics(90)
+| project minute, symbol, spread_bps = round(spread_bps, 2)
+| order by minute asc
+
+// 04 · Profondeur à ±5 pb (M$) · Graphique en aires
+LW_MinuteMetrics(90)
+| project minute, symbol, depth_musd = round(depth_5bps / 1e6, 3)
+| order by minute asc
+
+// 05 · Dislocation entre plateformes (pb) · Graphique en courbes
+LW_MinuteMetrics(90)
+| project minute, symbol, disloc_bps = round(disloc_bps, 2)
+| order by minute asc
+
+// 06 · Ancrage des stablecoins · Tableau
+LW_Depeg()
+| project ["Marché"] = symbol, ["Plateforme"] = venue, ["Prix"] = mid, ["Écart au dollar (pb)"] = depeg_bps, ["État"] = etat, ["Scénario"] = scenario
+
+// 07 · Déséquilibre acheteurs / vendeurs · Histogramme groupé
+LW_Window(2)
+| where asset_class == "crypto"
+| summarize imbalance = round(avg(imbalance_5bps), 3) by symbol, venue
+
+// 08 · Anomalies de fourchette · Tableau
+LW_SpreadAnomalies(120)
+| top 20 by ts desc
+
+// 09 · Santé des flux par plateforme · Tableau
+LW_VenueHealth()
+| project ["Plateforme"] = venue, ["Événements"] = events, ["Latence (ms)"] = latency_ms, ["Silence (s)"] = silence_s, ["État"] = etat
+
+// 10 · Événements reçus (5 min) · Statistique
+LW_Window(5)
+| count
+
+// 11 · Dernier carnet reçu · Statistique
+print ["Dernier"] = format_datetime(LW_Clock(), "HH:mm:ss")
+
+// 12 · Contexte macro · Tableau
+LW_Macro()
+| project ["VIX"] = vix_close, ["Régime"] = regime, ["Date VIX"] = format_datetime(vix_date, "dd/MM/yyyy"), ["€STR (%)"] = estr_pct, ["Variation €STR (pb)"] = estr_change_bp

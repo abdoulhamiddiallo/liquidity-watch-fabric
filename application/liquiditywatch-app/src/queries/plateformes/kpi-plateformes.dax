@@ -1,0 +1,14 @@
+// Indicateurs des plateformes : couverture, volume, latence, anomalies et récit.
+EVALUATE
+CALCULATETABLE(
+    ROW(
+        "Plateformes", [Plateformes actives],
+        "Marches", [Marchés suivis],
+        "Carnets", [Carnets analysés],
+        "CarnetsMinute", [Carnets par minute],
+        "Latence", [Latence moyenne (ms)],
+        "Anomalies", [Anomalies détectées],
+        "Recit", [Récit plateformes]
+    )
+    /*,FILTRES*/
+)

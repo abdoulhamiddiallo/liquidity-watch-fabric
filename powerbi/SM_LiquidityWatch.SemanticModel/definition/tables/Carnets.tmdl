@@ -1,0 +1,158 @@
+/// Carnets d'ordres agrégés par plateforme, marché et minute (table lw_book_silver)
+table 'Carnets'
+	lineageTag: 8cbb5636-fc3e-54ff-9e89-47d67fbefcfd
+
+	column 'Code plateforme'
+		dataType: string
+		isHidden
+		lineageTag: 14c9b4ab-3ff8-570b-9c57-5a94d68542bf
+		summarizeBy: none
+		sourceColumn: venue
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Symbole'
+		dataType: string
+		isHidden
+		lineageTag: 763baa9d-8357-5c8e-900b-c7f8097d334c
+		summarizeBy: none
+		sourceColumn: symbol
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Minute'
+		dataType: dateTime
+		isHidden
+		lineageTag: 88e584b0-0edc-57ed-ae31-356fa6d8ed33
+		summarizeBy: none
+		sourceColumn: minute
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Série'
+		dataType: string
+		lineageTag: d7532986-5ec2-5f8d-a4ad-be4d719e238c
+		summarizeBy: none
+		sourceColumn: serie
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fourchette (pb)'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 506f99f0-97b3-5902-a405-adee851f2448
+		summarizeBy: none
+		sourceColumn: spread_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profondeur ±5 pb ($)'
+		dataType: double
+		formatString: #,0
+		lineageTag: b63d7978-c42e-50a5-87d0-30b44194683a
+		summarizeBy: none
+		sourceColumn: depth_5bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Profondeur ±20 pb ($)'
+		dataType: double
+		formatString: #,0
+		lineageTag: 7c09190b-46ca-5839-8da2-06dc07169863
+		summarizeBy: none
+		sourceColumn: depth_20bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prix moyen'
+		dataType: double
+		formatString: #,0.0000
+		lineageTag: 9bb2ff4b-1357-5f0c-9d5e-2500dca9a953
+		summarizeBy: none
+		sourceColumn: mid
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Prix minimal'
+		dataType: double
+		formatString: #,0.0000
+		lineageTag: 9e7c0d38-1139-547a-b26f-b9d2f4a85360
+		summarizeBy: none
+		sourceColumn: mid_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Déséquilibre'
+		dataType: double
+		formatString: 0.000
+		lineageTag: b8da2e1d-3e76-5ecb-b714-0981030ce44d
+		summarizeBy: none
+		sourceColumn: imbalance
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Latence (ms)'
+		dataType: double
+		formatString: #,0
+		lineageTag: 6e9021ec-c760-5df2-b072-71f561863253
+		summarizeBy: none
+		sourceColumn: latency_ms
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Carnets'
+		dataType: int64
+		formatString: #,0
+		lineageTag: 14628eb2-d397-5945-a294-980518ca77df
+		summarizeBy: none
+		sourceColumn: carnets
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Choc'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: fa18d001-325f-5ec5-8fa6-5a53f252038b
+		summarizeBy: none
+		sourceColumn: choc
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Écart au dollar (pb)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: f56245f4-2b28-578e-8b66-b3e568b07fc3
+		summarizeBy: none
+		sourceColumn: ecart_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Écart minimal (pb)'
+		dataType: double
+		formatString: 0.0
+		lineageTag: 946a658c-fcf0-5034-8cc7-0cf6f7664183
+		summarizeBy: none
+		sourceColumn: ecart_min_bps
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'État'
+		dataType: string
+		lineageTag: 0e9a82eb-c29b-5fec-8e72-9ca8b6fa1d8e
+		summarizeBy: none
+		sourceColumn: etat
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Carnets' = m
+		mode: import
+		source =
+				let
+					Source = AzureDataExplorer.Contents(Cluster, Base, "lw_book_silver | summarize spread_bps = round(avg(spread_bps), 3), depth_5bps = avg(depth_5bps), depth_20bps = avg(depth_20bps), mid = avg(mid), mid_min = min(mid), imbalance = round(avg(imbalance_5bps), 3), latency_ms = round(avg(latency_ms), 1), carnets = count(), choc = countif(scenario == ""STRESS_TEST"") by venue, symbol, minute = bin(ts, 1m) | extend stable = symbol in (""USDT-USD"", ""USDC-USD"") | extend ecart_bps = iff(stable, round((mid - 1.0) * 10000, 2), real(null)), ecart_min_bps = iff(stable, round((mid_min - 1.0) * 10000, 2), real(null)) | extend etat = case(not(stable), """", abs(ecart_min_bps) >= 50, ""Décrochage"", abs(ecart_min_bps) >= 20, ""Sous surveillance"", ""Ancré""), serie = strcat(replace_string(symbol, ""-USD"", """"), "" · "", case(venue == ""BINANCE"", ""Binance"", venue == ""KRAKEN"", ""Kraken"", ""Coinbase"")) | project venue, symbol, minute, serie, spread_bps, depth_5bps, depth_20bps, mid, mid_min, imbalance, latency_ms, carnets = toint(carnets), choc = toint(choc), ecart_bps, ecart_min_bps, etat", [MaxRows = null, MaxSize = null, NoTruncate = null, AdditionalSetStatements = null]),
+					Types = Table.TransformColumnTypes(Source, {{"venue", type text}, {"symbol", type text}, {"minute", type datetime}, {"serie", type text}, {"spread_bps", type number}, {"depth_5bps", type number}, {"depth_20bps", type number}, {"mid", type number}, {"mid_min", type number}, {"imbalance", type number}, {"latency_ms", type number}, {"carnets", Int64.Type}, {"choc", Int64.Type}, {"ecart_bps", type number}, {"ecart_min_bps", type number}, {"etat", type text}}, "en-US")
+				in
+					Types
+
+	annotation PBI_ResultType = Table
+

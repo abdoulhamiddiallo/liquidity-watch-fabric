@@ -1,0 +1,32 @@
+relationship cac9c6fc-125e-5bec-951e-78498c1235f6
+	fromColumn: 'LSI'.'Minute'
+	toColumn: 'Temps'.'Minute'
+
+relationship cc679807-56cd-584e-ba15-ef6b187fe737
+	fromColumn: 'Carnets'.'Minute'
+	toColumn: 'Temps'.'Minute'
+
+relationship 609cda79-dbaa-5ffe-a182-3960e1fc0511
+	fromColumn: 'Anomalies'.'Minute'
+	toColumn: 'Temps'.'Minute'
+
+relationship 1fb51286-f66f-54a6-b4d5-8944d64b6d1d
+	fromColumn: 'LSI'.'Symbole'
+	toColumn: 'Marché'.'Symbole'
+
+relationship 15419be5-42ee-5be5-bb5f-b1a8c2a96db1
+	fromColumn: 'Carnets'.'Symbole'
+	toColumn: 'Marché'.'Symbole'
+
+relationship d6b75bf6-cfdc-5d9f-ac5e-c4b4e2ca6482
+	fromColumn: 'Anomalies'.'Symbole'
+	toColumn: 'Marché'.'Symbole'
+
+relationship 82bfe8e4-c5bc-5ee5-9577-51913ef67c3e
+	fromColumn: 'Carnets'.'Code plateforme'
+	toColumn: 'Plateforme'.'Code plateforme'
+
+relationship 3f0b1c38-fa94-5321-8f4e-957b7c07578d
+	fromColumn: 'Anomalies'.'Code plateforme'
+	toColumn: 'Plateforme'.'Code plateforme'
+

@@ -1,0 +1,71 @@
+/// Une ligne par minute captée, avec la session et l'heure de Paris
+table 'Temps'
+	lineageTag: 204115a7-b944-56d1-a3b7-b5b1f8fe70f8
+
+	column 'Minute'
+		dataType: dateTime
+		formatString: dd/mm/yyyy hh:nn
+		isHidden
+		isKey
+		lineageTag: cd5d9815-97e5-5ccc-bd57-be65b8633aa2
+		summarizeBy: none
+		sourceColumn: minute
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Heure'
+		dataType: dateTime
+		formatString: hh:nn
+		lineageTag: 509b02e1-7789-57eb-9473-708bd2d27580
+		summarizeBy: none
+		sourceColumn: heure
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tranche de 5 min'
+		dataType: dateTime
+		formatString: hh:nn
+		lineageTag: 2228ed88-8d55-5ce9-be68-45e8ae6f1616
+		summarizeBy: none
+		sourceColumn: tranche
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'N° session'
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: dae2056b-4810-5abd-abae-22da63db71e2
+		summarizeBy: none
+		sourceColumn: session
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Session'
+		dataType: string
+		lineageTag: 377e9f8a-5bb7-5527-9e81-2610bd35d8af
+		summarizeBy: none
+		sourceColumn: session_libelle
+		sortByColumn: 'N° session'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fenêtre'
+		dataType: string
+		lineageTag: 25c8dff7-5524-5377-8f0e-ab2e4ee52579
+		summarizeBy: none
+		sourceColumn: fenetre
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Temps' = m
+		mode: import
+		source =
+				let
+					Source = AzureDataExplorer.Contents(Cluster, Base, "let m = lw_book_silver | summarize choc = countif(scenario == ""STRESS_TEST"") by minute = bin(ts, 1m) | order by minute asc | extend saut = iff(isnull(prev(minute)) or minute - prev(minute) > 10m, 1, 0) | extend session = row_cumsum(saut); let s = m | summarize d = min(minute), f = max(minute), c = sum(choc) by session; m | join kind=inner s on session | extend heure = datetime_utc_to_local(minute, ""Europe/Paris"") | project minute, heure, tranche = bin(heure, 5m), session = toint(session), session_libelle = strcat(""Session "", session, "" · "", format_datetime(datetime_utc_to_local(d, ""Europe/Paris""), ""dd/MM HH:mm""), "" à "", format_datetime(datetime_utc_to_local(f, ""Europe/Paris""), ""HH:mm""), iff(c > 0, "" · test de stress"", "" · marché réel"")), fenetre = iff(choc > 0, ""Fenêtre de choc"", ""Hors choc"") | order by minute asc", [MaxRows = null, MaxSize = null, NoTruncate = null, AdditionalSetStatements = null]),
+					Types = Table.TransformColumnTypes(Source, {{"minute", type datetime}, {"heure", type datetime}, {"tranche", type datetime}, {"session", Int64.Type}, {"session_libelle", type text}, {"fenetre", type text}}, "en-US")
+				in
+					Types
+
+	annotation PBI_ResultType = Table
+

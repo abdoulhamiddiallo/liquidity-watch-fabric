@@ -1,0 +1,13 @@
+// Contexte macro : VIX et €STR du dernier jour connu, extrêmes depuis 2024 et récit.
+EVALUATE
+ROW(
+    "VIX", [VIX dernière clôture],
+    "Regime", [Régime VIX],
+    "VIXMax", [VIX maximal],
+    "DateVIXMax", [Date du VIX maximal],
+    "VIXMoyen", [VIX moyen],
+    "ESTR", [€STR dernier (%)],
+    "VariationVeille", [Variation €STR (pb)],
+    "VariationAn", [Évolution €STR sur un an (pb)],
+    "Recit", [Récit macro]
+)

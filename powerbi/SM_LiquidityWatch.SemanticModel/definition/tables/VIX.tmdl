@@ -1,0 +1,41 @@
+/// Clôture quotidienne du VIX (CBOE) depuis 2024, lue dans le lakehouse par raccourci OneLake
+table 'VIX'
+	lineageTag: bd176157-b0ef-561c-baf6-c93bb9b757c6
+
+	column 'Date'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: d89f1e9a-75d6-58e7-8a17-45fdd143fa81
+		summarizeBy: none
+		sourceColumn: vix_date
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'VIX'
+		dataType: double
+		formatString: 0.00
+		lineageTag: 6283b943-542d-5c43-b9f6-ebe442b42860
+		summarizeBy: none
+		sourceColumn: vix_close
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Régime'
+		dataType: string
+		lineageTag: 35d56efb-d4e7-5100-b65a-d13884469818
+		summarizeBy: none
+		sourceColumn: regime
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'VIX' = m
+		mode: import
+		source =
+				let
+					Source = AzureDataExplorer.Contents(Cluster, Base, "external_table(""macro_vix"") | project vix_date, vix_close, regime | order by vix_date asc", [MaxRows = null, MaxSize = null, NoTruncate = null, AdditionalSetStatements = null]),
+					Types = Table.TransformColumnTypes(Source, {{"vix_date", type datetime}, {"vix_close", type number}, {"regime", type text}}, "en-US")
+				in
+					Types
+
+	annotation PBI_ResultType = Table
+

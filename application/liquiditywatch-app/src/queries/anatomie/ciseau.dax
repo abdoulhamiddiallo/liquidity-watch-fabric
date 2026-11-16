@@ -1,0 +1,9 @@
+// Le ciseau de la crise : fourchette moyenne contre profondeur cumulée.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Temps'[Heure],
+    /*FILTRES,*/
+    "Fourchette", [Fourchette moyenne (pb)],
+    "Profondeur", [Profondeur cumulée (M$)]
+)
+ORDER BY 'Temps'[Heure]

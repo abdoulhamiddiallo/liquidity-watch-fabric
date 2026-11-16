@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" font-family="Inter, sans-serif">
+<defs><marker id="ah9AA8BC" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#9AA8BC"/></marker><marker id="ah00A3A3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#00A3A3"/></marker><marker id="ah0F6CBD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F6CBD"/></marker><marker id="ah2E8B57" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2E8B57"/></marker><marker id="ah7B4FE0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7B4FE0"/></marker><marker id="ahE8590C" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E8590C"/></marker><marker id="ahC99200" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C99200"/></marker><marker id="ah3B5BDB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#3B5BDB"/></marker><marker id="ah2B8A3E" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2B8A3E"/></marker><marker id="ahE03131" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E03131"/></marker><marker id="ah0B1F3A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0B1F3A"/></marker><filter id="sh" x="-10%" y="-10%" width="120%" height="130%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0B1F3A" flood-opacity=".12"/></filter><linearGradient id="gGold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF6DA"/><stop offset="1" stop-color="#FFFFFF"/></linearGradient></defs>
+<defs><marker id="ah0B7A75" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0B7A75"/></marker><marker id="ah5C6AC4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#5C6AC4"/></marker><marker id="ahD6336C" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D6336C"/></marker><marker id="ah0F9D8A" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#0F9D8A"/></marker><marker id="ah1F2328" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#1F2328"/></marker></defs>
+<rect x="6" y="6" width="988" height="360" rx="18" fill="#FFF3EA"/>
+<text x="24" y="31" font-size="9.5" font-weight="800" fill="#E8590C" letter-spacing="1.4">VOIE TEMPS RÉEL · UNE PHOTO DES CARNETS D'ORDRES TOUTES LES 5 SECONDES</text>
+<rect x="6" y="378" width="988" height="214" rx="18" fill="#F1F2FB"/>
+<text x="24" y="403" font-size="9.5" font-weight="800" fill="#5C6AC4" letter-spacing="1.4">VOIE CONTEXTE · LE CLIMAT DE MARCHÉ, UNE FOIS PAR JOUR, SANS COPIE</text>
+<g filter="url(#sh)"><rect x="20" y="50" width="152" height="168" rx="12" fill="#FFFFFF" stroke="#0B7A75" stroke-width="1.6"/></g>
+<path d="M20 62 a12 12 0 0 1 12 -12 h128 a12 12 0 0 1 12 12 v4 h-152 z" fill="#0B7A75"/>
+<text x="32" y="80" font-size="8" font-weight="800" fill="#0B7A75" letter-spacing=".8">SOURCES PUBLIQUES</text>
+<text x="32" y="96" font-size="11.2" font-weight="800" fill="#0B1F3A">Carnets d&#x27;ordres</text>
+<text x="32" y="112" font-size="8.9" fill="#5B6B82">Binance · Kraken</text>
+<text x="32" y="125" font-size="8.9" fill="#5B6B82">Coinbase · sans clé</text>
+<text x="32" y="138" font-size="8.9" fill="#5B6B82">BTC · ETH · SOL</text>
+<text x="32" y="151" font-size="8.9" fill="#5B6B82">USDT · USDC</text>
+<g filter="url(#sh)"><rect x="196" y="50" width="168" height="168" rx="12" fill="#FFFFFF" stroke="#00A3A3" stroke-width="1.6"/></g>
+<path d="M196 62 a12 12 0 0 1 12 -12 h144 a12 12 0 0 1 12 12 v4 h-168 z" fill="#00A3A3"/>
+<text x="208" y="80" font-size="8" font-weight="800" fill="#00A3A3" letter-spacing=".8">NOTEBOOK PYTHON</text>
+<text x="208" y="96" font-size="11.2" font-weight="800" fill="#0B1F3A">NB_01 Producteur</text>
+<text x="208" y="112" font-size="8.9" fill="#5B6B82">12 carnets en parallèle</text>
+<text x="208" y="125" font-size="8.9" fill="#5B6B82">toutes les 5 secondes</text>
+<text x="208" y="138" font-size="8.9" fill="#5B6B82">8 mesures de liquidité</text>
+<text x="208" y="151" font-size="8.9" fill="#5B6B82">stress-test balisé</text>
+<rect x="204" y="193" width="152" height="17" rx="8.5" fill="#1F2328"/><path transform="translate(209,196.5) scale(0.62)" fill="#FFFFFF" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/><text x="223" y="205" font-size="7.3" font-family="DejaVu Sans Mono, monospace" fill="#E6EDF3">notebooks/NB_01_…ipynb</text>
+<circle cx="358" cy="52" r="11" fill="#00A3A3" stroke="#fff" stroke-width="2.5"/><text x="358" y="56" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">5</text>
+<line x1="172" y1="134" x2="194" y2="134" stroke="#0B7A75" stroke-width="2" marker-end="url(#ah0B7A75)"/>
+<g filter="url(#sh)"><rect x="388" y="50" width="150" height="168" rx="12" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.6"/></g>
+<path d="M388 62 a12 12 0 0 1 12 -12 h126 a12 12 0 0 1 12 12 v4 h-150 z" fill="#E8590C"/>
+<text x="400" y="80" font-size="8" font-weight="800" fill="#E8590C" letter-spacing=".8">EVENTSTREAM</text>
+<text x="400" y="96" font-size="11.2" font-weight="800" fill="#0B1F3A">ES_LiquidityWatch</text>
+<text x="400" y="112" font-size="8.9" fill="#5B6B82">point de terminaison</text>
+<text x="400" y="125" font-size="8.9" fill="#5B6B82">compatible Event Hub</text>
+<text x="400" y="138" font-size="8.9" fill="#5B6B82">JSON · 144 évts / min</text>
+<circle cx="532" cy="52" r="11" fill="#E8590C" stroke="#fff" stroke-width="2.5"/><text x="532" y="56" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">4</text>
+<line x1="364" y1="134" x2="386" y2="134" stroke="#00A3A3" stroke-width="2" marker-end="url(#ah00A3A3)"/>
+<g filter="url(#sh)"><rect x="562" y="50" width="222" height="304" rx="14" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.8"/></g>
+<path d="M562 64 a14 14 0 0 1 14 -14 h194 a14 14 0 0 1 14 14 v4 h-222 z" fill="#E8590C"/>
+<text x="574" y="82" font-size="8" font-weight="800" fill="#E8590C" letter-spacing=".8">EVENTHOUSE · BASE KQL</text>
+<text x="574" y="98" font-size="11.5" font-weight="800" fill="#0B1F3A">EH_LiquidityWatch</text>
+<circle cx="778" cy="52" r="11" fill="#E8590C" stroke="#fff" stroke-width="2.5"/><text x="778" y="56" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">2</text>
+<rect x="574" y="108" width="198" height="38" rx="9" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/><text x="584" y="124" font-size="9.8" font-weight="800" fill="#0B1F3A">lw_book</text><text x="584" y="138" font-size="8.2" fill="#5B6B82">brut, tel qu&#x27;il arrive (étape 6)</text>
+<line x1="673.0" y1="146" x2="673.0" y2="162" stroke="#E8590C" stroke-width="2" marker-end="url(#ahE8590C)"/>
+<text x="679.0" y="158" font-size="7.6" font-weight="700" fill="#E8590C" text-anchor="start">politique de mise à jour</text>
+<rect x="574" y="164" width="198" height="38" rx="9" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.4"/><text x="584" y="180" font-size="9.8" font-weight="800" fill="#0B1F3A">lw_book_silver · lw_minute</text><text x="584" y="194" font-size="8.2" fill="#5B6B82">typée, contrôlée, résumée (étape 7)</text>
+<line x1="673.0" y1="202" x2="673.0" y2="218" stroke="#E8590C" stroke-width="2" marker-end="url(#ahE8590C)"/>
+<rect x="574" y="220" width="198" height="78" rx="9" fill="#FFF3EA" stroke="#E8590C" stroke-width="1.4" stroke-dasharray="4 3"/>
+<text x="584" y="237" font-size="9.8" font-weight="800" fill="#0B1F3A">9 fonctions LW_ (étape 7)</text>
+<text x="584" y="253" font-size="8.4" fill="#5B6B82">StressIndex : l&#x27;indice LSI</text>
+<text x="584" y="266" font-size="8.4" fill="#5B6B82">Depeg · VenueHealth</text>
+<text x="584" y="279" font-size="8.4" fill="#5B6B82">SpreadAnomalies · Macro</text>
+<rect x="574" y="308" width="198" height="17" rx="8.5" fill="#1F2328"/><path transform="translate(579,311.5) scale(0.62)" fill="#FFFFFF" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/><text x="593" y="320" font-size="7.3" font-family="DejaVu Sans Mono, monospace" fill="#E6EDF3">kql/KQL_LiquidityWatch.kql</text>
+<line x1="538" y1="134" x2="560" y2="134" stroke="#E8590C" stroke-width="2" marker-end="url(#ahE8590C)"/>
+<g filter="url(#sh)"><rect x="808" y="50" width="176" height="124" rx="12" fill="#FFFFFF" stroke="#E8590C" stroke-width="1.6"/></g>
+<path d="M808 62 a12 12 0 0 1 12 -12 h152 a12 12 0 0 1 12 12 v4 h-176 z" fill="#E8590C"/>
+<text x="820" y="80" font-size="8" font-weight="800" fill="#E8590C" letter-spacing=".8">TABLEAU TEMPS RÉEL</text>
+<text x="820" y="96" font-size="11.2" font-weight="800" fill="#0B1F3A">RTD_LiquidityWatch</text>
+<text x="820" y="112" font-size="8.9" fill="#5B6B82">12 vignettes · 30 s</text>
+<rect x="816" y="149" width="160" height="17" rx="8.5" fill="#1F2328"/><path transform="translate(821,152.5) scale(0.62)" fill="#FFFFFF" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/><text x="835" y="161" font-size="7.3" font-family="DejaVu Sans Mono, monospace" fill="#E6EDF3">kql/RTD_LiquidityWatch.kql</text>
+<circle cx="978" cy="52" r="11" fill="#E8590C" stroke="#fff" stroke-width="2.5"/><text x="978" y="56" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">9</text>
+<g filter="url(#sh)"><rect x="808" y="190" width="176" height="100" rx="12" fill="#FFFFFF" stroke="#D6336C" stroke-width="1.6"/></g>
+<path d="M808 202 a12 12 0 0 1 12 -12 h152 a12 12 0 0 1 12 12 v4 h-176 z" fill="#D6336C"/>
+<text x="820" y="220" font-size="8" font-weight="800" fill="#D6336C" letter-spacing=".8">ACTIVATOR</text>
+<text x="820" y="236" font-size="11.2" font-weight="800" fill="#0B1F3A">ACT_LiquidityWatch</text>
+<text x="820" y="252" font-size="8.9" fill="#5B6B82">LSI ≥ 3 · message Teams</text>
+<circle cx="978" cy="192" r="11" fill="#D6336C" stroke="#fff" stroke-width="2.5"/><text x="978" y="196" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">10</text>
+<line x1="784" y1="104" x2="806" y2="104" stroke="#E8590C" stroke-width="2" marker-end="url(#ahE8590C)"/>
+<line x1="784" y1="238" x2="806" y2="238" stroke="#D6336C" stroke-width="2" marker-end="url(#ahD6336C)"/>
+<circle cx="830" cy="322" r="11" fill="#D6336C" stroke="#fff" stroke-width="2.5"/><text x="830" y="326" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">11</text>
+<text x="848" y="318" font-size="8.4" font-weight="700" fill="#D6336C">Exercice de crise :</text>
+<text x="848" y="331" font-size="8.4" font-weight="700" fill="#D6336C">l'alerte arrive dans Teams</text>
+<g filter="url(#sh)"><rect x="20" y="420" width="152" height="150" rx="12" fill="#FFFFFF" stroke="#5C6AC4" stroke-width="1.6"/></g>
+<path d="M20 432 a12 12 0 0 1 12 -12 h128 a12 12 0 0 1 12 12 v4 h-152 z" fill="#5C6AC4"/>
+<text x="32" y="450" font-size="8" font-weight="800" fill="#5C6AC4" letter-spacing=".8">SOURCES PUBLIQUES</text>
+<text x="32" y="466" font-size="11.2" font-weight="800" fill="#0B1F3A">Climat de marché</text>
+<text x="32" y="482" font-size="8.9" fill="#5B6B82">€STR · BCE</text>
+<text x="32" y="495" font-size="8.9" fill="#5B6B82">VIX · CBOE</text>
+<text x="32" y="508" font-size="8.9" fill="#5B6B82">CSV quotidiens</text>
+<g filter="url(#sh)"><rect x="196" y="420" width="168" height="150" rx="12" fill="#FFFFFF" stroke="#00A3A3" stroke-width="1.6"/></g>
+<path d="M196 432 a12 12 0 0 1 12 -12 h144 a12 12 0 0 1 12 12 v4 h-168 z" fill="#00A3A3"/>
+<text x="208" y="450" font-size="8" font-weight="800" fill="#00A3A3" letter-spacing=".8">NOTEBOOK PYSPARK</text>
+<text x="208" y="466" font-size="11.2" font-weight="800" fill="#0B1F3A">NB_02 Macro</text>
+<text x="208" y="482" font-size="8.9" fill="#5B6B82">téléchargement</text>
+<text x="208" y="495" font-size="8.9" fill="#5B6B82">régime de volatilité</text>
+<text x="208" y="508" font-size="8.9" fill="#5B6B82">tables Delta</text>
+<rect x="204" y="545" width="152" height="17" rx="8.5" fill="#1F2328"/><path transform="translate(209,548.5) scale(0.62)" fill="#FFFFFF" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/><text x="223" y="557" font-size="7.3" font-family="DejaVu Sans Mono, monospace" fill="#E6EDF3">notebooks/NB_02_…ipynb</text>
+<circle cx="358" cy="422" r="11" fill="#00A3A3" stroke="#fff" stroke-width="2.5"/><text x="358" y="426" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">3</text>
+<g filter="url(#sh)"><rect x="388" y="420" width="150" height="150" rx="12" fill="#FFFFFF" stroke="#00A3A3" stroke-width="1.6"/></g>
+<path d="M388 432 a12 12 0 0 1 12 -12 h126 a12 12 0 0 1 12 12 v4 h-150 z" fill="#00A3A3"/>
+<text x="400" y="450" font-size="8" font-weight="800" fill="#00A3A3" letter-spacing=".8">LAKEHOUSE</text>
+<text x="400" y="466" font-size="11.2" font-weight="800" fill="#0B1F3A">LH_LiquidityWatch</text>
+<text x="400" y="482" font-size="8.9" fill="#5B6B82">macro_estr</text>
+<text x="400" y="495" font-size="8.9" fill="#5B6B82">macro_vix</text>
+<text x="400" y="508" font-size="8.9" fill="#5B6B82">OneLake · Delta</text>
+<circle cx="532" cy="422" r="11" fill="#00A3A3" stroke="#fff" stroke-width="2.5"/><text x="532" y="426" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">3</text>
+<line x1="172" y1="495" x2="194" y2="495" stroke="#5C6AC4" stroke-width="2" marker-end="url(#ah5C6AC4)"/>
+<line x1="364" y1="495" x2="386" y2="495" stroke="#00A3A3" stroke-width="2" marker-end="url(#ah00A3A3)"/>
+<path d="M 538 495 L 640 495 L 640 356" fill="none" stroke="#3B5BDB" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#ah3B5BDB)"/>
+<text x="546" y="486" font-size="8.6" font-weight="700" fill="#3B5BDB" text-anchor="start">raccourci OneLake</text>
+<text x="546" y="512" font-size="8.6" font-weight="700" fill="#3B5BDB" text-anchor="start">zéro copie</text>
+<circle cx="640" cy="495" r="11" fill="#3B5BDB" stroke="#fff" stroke-width="2.5"/><text x="640" y="499" font-size="10.5" font-weight="800" fill="#fff" text-anchor="middle">8</text>
+<text x="808" y="440" font-size="9.4" font-weight="800" fill="#5C6AC4">Pourquoi deux voies ?</text>
+<text x="808" y="458" font-size="8.8" fill="#5B6B82">La liquidité se mesure</text>
+<text x="808" y="472" font-size="8.8" fill="#5B6B82">à la seconde ; le climat de</text>
+<text x="808" y="486" font-size="8.8" fill="#5B6B82">marché change une fois par</text>
+<text x="808" y="500" font-size="8.8" fill="#5B6B82">jour. Je ne mélange pas les</text>
+<text x="808" y="514" font-size="8.8" fill="#5B6B82">rythmes : je les relie au</text>
+<text x="808" y="528" font-size="8.8" fill="#5B6B82">moment de lire.</text>
+<text x="24" y="596" font-size="8.4" fill="#5B6B82">Les pastilles numérotées renvoient aux étapes du guide ; les pastilles noires, au fichier du dépôt GitHub.</text>
+</svg>

@@ -1,0 +1,15 @@
+// État de chaque cryptoactif : dernier LSI, pic, heure du pic, minutes en détresse.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Marché'[Ordre],
+    'Marché'[Marché],
+    'Marché'[Actif],
+    TREATAS({"Cryptoactif"}, 'Marché'[Classe]),
+    /*FILTRES,*/
+    "Dernier", [LSI dernier],
+    "Max", [LSI maximal],
+    "Pic", [Heure du pic],
+    "Detresse", [Minutes en détresse],
+    "Fourchette", [Fourchette moyenne (pb)]
+)
+ORDER BY 'Marché'[Ordre]

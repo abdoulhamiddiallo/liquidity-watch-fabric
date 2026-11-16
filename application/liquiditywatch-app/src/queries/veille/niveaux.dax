@@ -1,0 +1,8 @@
+// Minutes passées à chaque niveau de stress (une minute compte une fois par marché).
+EVALUATE
+SUMMARIZECOLUMNS(
+    'LSI'[Niveau],
+    /*FILTRES,*/
+    "Minutes", [Minutes-marché]
+)
+ORDER BY 'LSI'[Niveau]

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Fourchette moyenne (axe gauche) contre profondeur cumulée (axe droit).",
+  "width": "container",
+  "height": "container",
+  "encoding": {
+    "x": {
+      "field": "Heure",
+      "type": "temporal",
+      "title": null,
+      "axis": {
+        "format": "%H:%M",
+        "labelAngle": 0,
+        "tickCount": 8,
+        "grid": false
+      }
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "opacity": 0.18,
+        "color": "@profondeur",
+        "line": {
+          "color": "@profondeur",
+          "strokeWidth": 2.4
+        }
+      },
+      "encoding": {
+        "y": {
+          "field": "Profondeur",
+          "type": "quantitative",
+          "title": "Profondeur ±5 pb (M$)",
+          "axis": {
+            "orient": "right",
+            "titleColor": "@profondeur",
+            "titleFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Heure",
+            "type": "temporal",
+            "format": "%H:%M",
+            "title": "Heure"
+          },
+          {
+            "field": "Profondeur",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Profondeur (M$)"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "line",
+        "interpolate": "monotone",
+        "strokeWidth": 3,
+        "color": "@fourchette"
+      },
+      "encoding": {
+        "y": {
+          "field": "Fourchette",
+          "type": "quantitative",
+          "title": "Fourchette (pb)",
+          "axis": {
+            "orient": "left",
+            "titleColor": "@fourchette",
+            "titleFontSize": 12
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Heure",
+            "type": "temporal",
+            "format": "%H:%M",
+            "title": "Heure"
+          },
+          {
+            "field": "Fourchette",
+            "type": "quantitative",
+            "format": ".2f",
+            "title": "Fourchette (pb)"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "y": "independent"
+    }
+  }
+}

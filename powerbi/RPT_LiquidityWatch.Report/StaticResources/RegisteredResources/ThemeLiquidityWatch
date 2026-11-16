@@ -1,0 +1,118 @@
+{
+  "name": "Liquidity Watch",
+  "dataColors": [
+    "#5B8CFF",
+    "#B48CFF",
+    "#2DD4BF",
+    "#FF8A3D",
+    "#F5C451",
+    "#34C38F",
+    "#EF5350",
+    "#3B82F6",
+    "#F3BA2F",
+    "#8B7CFF"
+  ],
+  "background": "#0E1527",
+  "foreground": "#EEF3FB",
+  "tableAccent": "#2DD4BF",
+  "good": "#34C38F",
+  "neutral": "#F5C451",
+  "bad": "#EF5350",
+  "textClasses": {
+    "callout": {
+      "fontSize": 26,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#EEF3FB"
+    },
+    "title": {
+      "fontSize": 15,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#EEF3FB"
+    },
+    "header": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI Semibold",
+      "color": "#EEF3FB"
+    },
+    "label": {
+      "fontSize": 12,
+      "fontFace": "Segoe UI",
+      "color": "#93A3C2"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "visualHeader": [
+          {
+            "show": false
+          }
+        ],
+        "categoryAxis": [
+          {
+            "fontSize": 14,
+            "labelColor": {
+              "solid": {
+                "color": "#93A3C2"
+              }
+            }
+          }
+        ],
+        "valueAxis": [
+          {
+            "fontSize": 14,
+            "labelColor": {
+              "solid": {
+                "color": "#93A3C2"
+              }
+            }
+          }
+        ],
+        "legend": [
+          {
+            "fontSize": 14,
+            "labelColor": {
+              "solid": {
+                "color": "#EEF3FB"
+              }
+            }
+          }
+        ],
+        "labels": [
+          {
+            "fontSize": 14,
+            "color": {
+              "solid": {
+                "color": "#EEF3FB"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "page": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#070B16"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "outspace": [
+          {
+            "color": {
+              "solid": {
+                "color": "#03060D"
+              }
+            },
+            "transparency": 0
+          }
+        ]
+      }
+    }
+  }
+}

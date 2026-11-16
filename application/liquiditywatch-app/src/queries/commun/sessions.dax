@@ -1,0 +1,10 @@
+// Sessions captées par le producteur, de la plus récente à la plus ancienne.
+EVALUATE
+SUMMARIZECOLUMNS(
+    'Temps'[N° session],
+    'Temps'[Session],
+    "Debut", MIN('Temps'[Heure]),
+    "Fin", MAX('Temps'[Heure]),
+    "MinutesChoc", CALCULATE(COUNTROWS('Temps'), 'Temps'[Fenêtre] = "Fenêtre de choc") + 0
+)
+ORDER BY 'Temps'[N° session] DESC

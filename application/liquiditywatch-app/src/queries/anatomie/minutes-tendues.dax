@@ -1,0 +1,16 @@
+// Les huit minutes les plus tendues de la sélection.
+EVALUATE
+TOPN(
+    8,
+    SUMMARIZECOLUMNS(
+        'Temps'[Heure],
+        'Marché'[Marché],
+        /*FILTRES,*/
+        "LSI", [LSI maximal],
+        "Fourchette", [Fourchette maximale (pb)],
+        "Dislocation", [Dislocation maximale (pb)],
+        "Volatilite", [Volatilité maximale (pb)]
+    ),
+    [LSI], DESC
+)
+ORDER BY [LSI] DESC
