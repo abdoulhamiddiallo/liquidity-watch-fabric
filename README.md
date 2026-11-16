@@ -173,6 +173,21 @@ LW_StressIndex(90)
 | project symbol, minute, lsi, niveau, spread_bps, depth_5bps, disloc_bps
 ```
 
+### 📺 Le tableau de bord en temps réel `RTD_LiquidityWatch`
+
+Les 12 requêtes KQL alimentent un tableau de bord Real-Time Intelligence qui se rafraîchit tout seul : l'indice de stress par marché, la fourchette, la profondeur, la dislocation entre plateformes, l'ancrage des stablecoins, la santé des flux et le contexte macro, sur la dernière heure.
+
+<p align="center">
+  <img src="docs/gifs/07_tableau_de_bord_temps_reel.gif" alt="Le tableau de bord en temps réel RTD_LiquidityWatch en mouvement" width="100%">
+</p>
+
+| | |
+|---|---|
+| ![Indice de stress de liquidité et LSI minute par minute](docs/images/fabric/06_rtd_indice_de_stress.png) | ![Fourchette consolidée et profondeur à ±5 pb](docs/images/fabric/07_rtd_fourchette_profondeur.png) |
+| **Indice de stress** : le niveau de chaque marché, le LSI minute par minute, 720 événements dans l'heure | **Fourchette et profondeur** : le pic de fourchette de SOL-USD face à une profondeur stable |
+| ![Dislocation entre plateformes et ancrage des stablecoins](docs/images/fabric/08_rtd_dislocation_ancrage.png) | ![Santé des flux par plateforme et contexte macro](docs/images/fabric/09_rtd_sante_flux_macro.png) |
+| **Dislocation et ancrage** : l'écart entre plateformes et le prix de l'USDT et de l'USDC | **Santé des flux et contexte macro** : événements et latence par plateforme, VIX et €STR |
+
 ---
 
 ## 📊 Rapport Power BI
